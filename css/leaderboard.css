@@ -22,14 +22,13 @@
 }
 .lbBox {
     position: absolute;
-    width: 358px;
     height: 68px;
     background-color: black;
     border-radius: 10px;
     display: flex;
     align-items: center;
     overflow: visible;
-    transition: ease 500ms;
+    transition: transform 300ms ease, opacity 300ms ease, width 500ms ease;
 }
 .lb_Number {
     width: 40px;
@@ -58,40 +57,50 @@
 .lb_Stats {
     position: relative;
     left: 8px;
-    width: 270px;
     height: 55px;
-    line-height: 25px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     font-size: 18px;
     color: #9e9e9e;
+    white-space: nowrap;
+}
+.lb_StatsTop {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+.lb_StatsBottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex: 1;
 }
 .lb_Acc {
     font-size: 17px;
+    text-align: right;
 }
 .lb_PP {
     font-size: 22px;
     font-weight: 600;
 }
-.lb_StatsRight {
-    text-align: right;
-}
 .lb_Combo {
-    position: absolute;
-    bottom: 0;
-    right: 115px;
     text-align: right;
 }
-.lb_StatsLeft,
-.lb_StatsRight {
-    position: absolute;
-    bottom: 0;
-    width: 250px;
+.MissACombo {
+    display: flex;
+    gap: 8px;
+}
+.lb_Miss {
+    color: #ff6767;
+    text-shadow: 0 0 8px #ff6767;
 }
 .lb_Name {
     color: white;
     font-size: 22px;
-    width: 150px;
+    width: fit-content;
     overflow: hidden;
-    white-space: nowrap;
     text-overflow: ellipsis;
 }
 .bluelight {

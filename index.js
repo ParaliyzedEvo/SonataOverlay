@@ -55,6 +55,9 @@ let playerPosition;
 let LocalNameData;
 let LocalResultNameData;
 
+let lastLbWidth = null;
+const LB_WIDTH_OFFSET = -60;
+
 let graphSmoothing = 0;
 let configDarker = createChartConfig2('rgba(60, 60, 60, 0.6)');
 let configLighter = createChartConfig('rgba(0, 0, 0, 1)');
@@ -823,6 +826,7 @@ function renderSlots() {
             cache['h0'] = play.hits['0'];
             h0.update(cache['h0']);
             h0Text.innerHTML = cache['h0'] + 'x';
+            lbcpMiss.innerHTML = cache['h0']; // <-- new
             tapJudgement(`0`)
             hitJudgementsAdd(`0`, progressbar);
             if (cache['h0'] > `0`) {
@@ -1045,6 +1049,7 @@ function renderSlots() {
         }
       
           if (cache['data.menu.state'] !== 2 && cache['data.menu.state'] !== 7) {
+            lastLbWidth = null;
             leaderboardFetch = false;
             leaderboard.style.opacity = 0;
             lbopCont.innerHTML = "";
@@ -1245,9 +1250,14 @@ function renderSlots() {
         }
 
         if (tempMapScores.length > 0) {
-            if (cache['play.score'] >= tempMapScores[playerPosition - 2]) 
-                { playerPosition-- }
-            else if (cache['play.score'] === 0) { playerPosition = tempSlotLength + 1 }
+            if (cache['play.score'] >= tempMapScores[playerPosition - 2]) {
+                playerPosition--;
+                recalcLbWidth();
+            }
+            else if (cache['play.score'] === 0) {
+                playerPosition = tempSlotLength + 1;
+                recalcLbWidth();
+            }
         }
 
             if (rankingPanelBG.style.opacity !== 1 && cache['data.menu.state'] === 2 && cache['beatmap.time.lastObject'] > 0 && cache['beatmap.time.live'] >= cache['beatmap.time.lastObject'] + 1000 || cache['data.menu.state'] === 7) {
@@ -1883,6 +1893,49 @@ function renderSlots() {
     }
 }
 
+function recalcLbWidth() {
+  const windowStart = Math.max(1, playerPosition - 7);
+  const windowEnd = playerPosition;
+
+  let maxWidth = 0;
+
+  const measureNaturalWidth = (el) => {
+    const clone = el.cloneNode(true);
+    clone.style.position = 'absolute';
+    clone.style.visibility = 'hidden';
+    clone.style.pointerEvents = 'none';
+    clone.style.transition = 'none';
+    clone.style.width = 'fit-content';
+    clone.style.left = '-9999px';
+    clone.style.top = '0';
+    document.body.appendChild(clone);
+
+    const width = clone.scrollWidth;
+    document.body.removeChild(clone);
+    return width;
+  };
+
+  for (let i = windowStart; i <= windowEnd; i++) {
+    const el = document.getElementById(`playerslot${i}`);
+    if (!el) continue;
+    maxWidth = Math.max(maxWidth, measureNaturalWidth(el));
+  }
+
+  const currentplayerCont = document.getElementById('currentplayerCont');
+  if (currentplayerCont) {
+    maxWidth = Math.max(maxWidth, measureNaturalWidth(currentplayerCont));
+  }
+
+  if (maxWidth > 0) {
+    const finalWidth = Math.ceil(maxWidth + LB_WIDTH_OFFSET);
+    if (finalWidth === lastLbWidth) return;
+    lastLbWidth = finalWidth;
+    document.querySelectorAll('.lbBox').forEach(el => {
+      el.style.width = `${finalWidth}px`;
+    });
+  }
+}
+
 async function setupMapScores(beatmapID, currentModsNumber) {
     if (leaderboardFetch === false) {
         if (cache['LBOptions'] === "Selected Mods" && !cache['play.mods.received']) {
@@ -1923,15 +1976,20 @@ async function setupMapScores(beatmapID, currentModsNumber) {
                             <div id="lb_Ranking_slot${i}" class="${data[i - 1].rank} lb_Rank">${data[i - 1].rank.replace("H", "")}</div>
                         </div> 
             `;
+            const misses = data[i - 1].count_miss;
+
             let playerStats = `
                         <div id="lb_Stats_slot${i}" class="lb_Stats">
-                            <div id="lb_StatsLeft_slot${i}" class="lb_StatsLeft">
+                            <div id="lb_StatsTop_slot${i}" class="lb_StatsTop">
                                 <div id="lb_Name_slot${i}" class="lb_Name">${data[i - 1].username}</div>
-                                <div id="lb_Score_slot${i}">${formatNumber(data[i - 1].score)}</div>
-                            </div>
-                            <div id="lb_Combo_slot${i}" class="lb_Combo">${spaceit(data[i - 1].max_combo)}x</div>
-                            <div id="lb_StatsRight_slot${i}" class="lb_StatsRight">
                                 <div id="lb_PP_slot${i}" class="lb_PP">${Math.round(data[i - 1].pp)}pp</div>
+                            </div>
+                            <div id="lb_StatsBottom_slot${i}" class="lb_StatsBottom">
+                                <div id="lb_Score_slot${i}">${formatNumber(data[i - 1].score)}</div>
+                                <div class="MissACombo">
+                                    <div id="lb_Combo_slot${i}" class="lb_Combo">${spaceit(data[i - 1].max_combo)}x</div>
+                                    <div id="lb_Miss_slot${i}" class="lb_Miss">${misses}</div>
+                                </div>
                                 <div id="lb_Acc_slot${i}">${data[i - 1].acc.toFixed(2)}%</div>
                             </div>
                         </div>
@@ -1946,6 +2004,9 @@ async function setupMapScores(beatmapID, currentModsNumber) {
                 ${playerMods}
             `;
             document.getElementById("lbopCont").appendChild(playerContainer);
+            if (misses === 0) {
+                document.getElementById(`lb_Miss_slot${i}`).style.opacity = '0';
+            }
             document.getElementById(`lb_Mods_slot${i}`).innerHTML = "";
             let minimodsCount = data[i - 1].mods.length;
             for (let k = 0; k < minimodsCount; k++) {
@@ -1960,5 +2021,6 @@ async function setupMapScores(beatmapID, currentModsNumber) {
                 document.getElementById(`lb_Name_slot${i}`).setAttribute("class", "lb_Name bluelight")
             }
         }
+        recalcLbWidth();
     }
 }
