@@ -56,7 +56,7 @@ let LocalNameData;
 let LocalResultNameData;
 
 let lastLbWidth = null;
-const LB_WIDTH_OFFSET = -60;
+const LB_WIDTH_OFFSET = -120;
 
 let graphSmoothing = 0;
 let configDarker = createChartConfig2('rgba(60, 60, 60, 0.6)');

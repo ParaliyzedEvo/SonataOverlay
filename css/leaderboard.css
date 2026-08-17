@@ -55,8 +55,7 @@
     top: 30px;
 }
 .lb_Stats {
-    position: relative;
-    left: 8px;
+    margin-left: 8px;
     height: 55px;
     flex: 1;
     display: flex;
@@ -68,13 +67,15 @@
 }
 .lb_StatsTop {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: baseline;
+    gap: 32px;
 }
 .lb_StatsBottom {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: baseline;
+    gap: 32px;
     flex: 1;
 }
 .lb_Acc {
