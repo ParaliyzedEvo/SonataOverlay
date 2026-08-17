@@ -1,13 +1,5 @@
 [
     {
-        "uniqueID": "OverridePlayerID",
-        "type": "text",
-        "title": "Override Player ID",
-        "description": "Override Player ID for replay (just in case someone username same as other user id)",
-        "options": "",
-        "value": ""
-    },
-    {
         "uniqueID": "Bar",
         "type": "text",
         "title": "Setup",

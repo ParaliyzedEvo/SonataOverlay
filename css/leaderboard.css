@@ -24,25 +24,31 @@
 }
 .lbBox {
     position: absolute;
-    width: 358px;
+    min-width: 358px;
     height: 68px;
     background-color: black;
     border-radius: 10px;
     display: flex;
     align-items: center;
     overflow: visible;
-    transition: ease 350ms;
+    transition: ease 400ms;
+    padding-right: 20px;
+    box-sizing: border-box;
 }
 .lb_Miss {
     color: #ff6767;
     text-shadow: 0 0 10px #ff6767;
 }
 .lb_Number {
-    width: 40px;
-    height: 60px;
     display: flex;
+    flex: 0 0 auto;
+    box-sizing: border-box;
+    padding-left: 12px;
+    padding-right: 12px;
+    height: 60px;
     justify-content: center;
     align-items: center;
+    transition: ease 400ms;
 }
 .positions {
     font-size: 20px;
@@ -54,6 +60,7 @@
     background-size: 100%;
     background-repeat: no-repeat;
     background-position: 50% 50%;
+    flex-shrink: 0;
 }
 .lb_Rank {
     position: relative;
@@ -65,18 +72,17 @@
 .lb_Stats {
     position: relative;
     left: 8px;
-    width: 270px;
-    height: 55px;
-    line-height: 25px;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: space-between;
     font-size: 18px;
-    color: #9e9e9e;
-}
-.lb_Acc {
-    font-size: 17px;
+    color: #828281;
+    white-space: nowrap;
 }
 .lb_PP {
     font-size: 22px;
-    font-weight: 600;
+    font-weight: 800;
 }
 .loved {
     color: pink;
@@ -84,32 +90,19 @@
 .qualified {
     color: greenyellow;
 }
-.lb_StatsRight {
-    text-align: right;
-}
-.lb_StatsMiddle {
-    position: absolute;
-    bottom: 0;
-    right: 110px;
-    text-align: right;
+.lb_StatsTop,
+.lb_StatsBottom {
     display: flex;
-    gap: 8px;
-    transition: ease 350ms;
-}
-.lb_StatsLeft,
-.lb_StatsRight {
-    position: absolute;
-    bottom: 0;
-    width: 250px;
-    transition: ease 350ms;
+    transition: ease 400ms;
+    justify-content: space-between;
 }
 .lb_Name {
     color: white;
     font-size: 22px;
-    width: 150px;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+    font-weight: 600;
 }
 .bluelight {
     color: #71cdff;
@@ -134,6 +127,22 @@
     display: flex;
     justify-content: flex-start;
 }
+
+.lb_Score {
+    width: 60px;
+}
+.lb_Acc {
+    width: 100px;
+    text-align: right;
+}
+
+.MissACombo {
+    display: flex;
+    flex: 1;
+    gap: 8px;
+    justify-content: flex-end;
+}
+
 .modslb {
 	width: 40px;
 	height: 27px;

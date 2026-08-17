@@ -1,6 +1,6 @@
 export const cache = {};
 
-export const VALID_MODS = new Set(['AP', 'AT', 'CL', 'CN', 'DT', 'EZ', 'FL', 'HD', 'HR', 'HT', 'NC', 'NF', 'NM', 'PF', 'RX', 'SD', 'SO', 'TD', 'TP', 'V2']);
+export const VALID_MODS = new Set(['AP', 'AT', 'CL', 'CN', 'DT', 'EZ', 'FL', 'HD', 'HR', 'HT', 'NC', 'NF', 'NM', 'PF', 'RX', 'SD', 'SO', 'TD', 'TP', 'v2']);
 
 export const updateCache = (key, value, onChange) => {
   if (value === undefined || cache[key] === value) return false;
@@ -46,12 +46,6 @@ export function hitJudgementsClear(type) {
 export function tapJudgement(type) {
     // Create lookup object to avoid switch/if statements
     const judgementStyles = {
-        'katu': {
-            glowId: 'katuCont',
-            textId: 'katuText',
-            color: '#46cbffff',
-            color2: '#278eb6'  
-        },
         '100': {
             glowId: 'h100Cont',
             textId: 'h100Text',

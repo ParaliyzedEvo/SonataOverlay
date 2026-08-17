@@ -139,6 +139,8 @@ let lbcpLineDir = null;
 let lbcpLineHeight = 40;
 let graphSmoothing = 0; 
 let OD = 0;
+let lastLbWidth = null;
+let lastLbNumberWidth = null;
 
 window.onload = () => {
   ['darker', 'lighter', 'darker2', 'lighter2'].forEach(type => {
@@ -205,64 +207,6 @@ socket.commands((data) => {
       console.log(error);
     }
   });
-
-const slots = document.getElementById('slots');
-const CAPACITY = 28;
-const VISIBLE = 12;
-const history = new Array(CAPACITY).fill('');
-let writePos = 0;
-
-for (let i = 0; i < CAPACITY; i++) {
-  const div = document.createElement('div');
-  div.className = 'slot hidden';
-  slots.appendChild(div);
-}
-
-function pushJudgement(type = '300') {
-  const allowed = ['300', '100', '50', 'miss', '300g', '100k'];
-  if (!allowed.includes(String(type))) return;
-  history[writePos] = String(type);
-  writePos = (writePos + 1) % CAPACITY;
-  renderSlots();
-}
-
-function clearSlots() {
-  history.fill('');
-  writePos = 0;
-  for (let i = 0; i < CAPACITY; i++) {
-    const el = slots.children[i];
-    if (!el) continue;
-    el.dataset.judgement = '';
-    el.className = 'slot hidden';
-    el.style.opacity = 0;
-    el.classList.remove('hot');
-  }
-}
-
-function renderSlots() {
-  for (let i = 0; i < CAPACITY; i++) {
-    const el = slots.children[i];
-    const val = history[i];
-    if (!val) {
-      el.dataset.judgement = '';
-      el.className = 'slot hidden';
-      continue;
-    }
-    const distance = (writePos - 1 - i + CAPACITY) % CAPACITY;
-    el.dataset.judgement = val;
-    if (distance < VISIBLE) {
-      el.className = 'slot show';
-      el.style.opacity = 1 - (distance / VISIBLE);
-      if (distance === 0) {
-        el.classList.add('hot');
-        setTimeout(() => el.classList.remove('hot'), 140);
-      }
-    } else {
-      el.className = 'slot hidden';
-      el.style.opacity = 0;
-    }
-  }
-}
   
   socket.api_v2(({ state, settings, performance, resultsScreen, play, beatmap, folders, files, directPath, client, leaderboard, server, profile, game }) => {
     try {      
@@ -311,7 +255,7 @@ function renderSlots() {
         });
 
         updateCache('play.accuracy', play.accuracy, (accVal) => {
-            setText(lbcpAcc, accVal.toFixed(2) + `%`);
+            setText(lbcpAcc, Number(accVal.toFixed(2)) + `%`);
             setText(acc, accVal);
             acc.update(accVal)
         });
@@ -428,14 +372,14 @@ function renderSlots() {
           OD = beatmap.stats.od.converted;
           if (cache['play.mods.name'].includes("DT") || cache['play.mods.name'].includes("NC")) OD = 500 / 333 * beatmap.stats.od.converted + (-2210) / 333;
           if (cache['play.mods.name'].includes("HT")) OD = 500 / 667 * beatmap.stats.od.converted + (-2210) / 667;
-
-          calculate_od(OD, cache['mode']);
-
-          setStyle(URbar, 'width', `${(error_h50 * 3.5) + 40}px`);
-          setStyle(l50, 'width', `${error_h50 * 3.5}px`);
-          setStyle(l100, 'width', `${error_h100 * 3.5}px`);
-          setStyle(l300, 'width', `${error_h300 * 3.5}px`);
         });
+
+        calculate_od(OD, cache['mode']);
+
+        setStyle(l50, 'width', `${error_h50 * 4}px`);
+        setStyle(l100, 'width', `${error_h100 * 4}px`);
+        setStyle(l300, 'width', `${error_h300 * 4}px`);
+        setStyle(URbar, 'width', `${document.getElementById('l50').clientWidth + 40}px`);
 
         updateCache('beatmap.stats.hp.converted', beatmap.stats.hp.converted, (val) => {setText(HPText, val.toFixed(2))});
 
@@ -525,12 +469,7 @@ function renderSlots() {
 
         updateCache('resultsScreen.scoreId', resultsScreen.scoreId);
         updateCache('resultsScreen.createdAt', resultsScreen.createdAt, (val) => {setHTML(createdAt, `Played: ` + jQuery.timeago(val))});
-
-        updateCache('resultsScreen.mode.name', resultsScreen.mode.name, (mode) => {
-            const hide = mode === 'mania' || mode === 'taiko';
-            setStyle(CS, 'display', hide ? 'none' : 'flex');
-            setStyle(AR, 'display', hide ? 'none' : 'flex');
-        });
+        updateCache('resultsScreen.mode.name', resultsScreen.mode.name);
 
         updateCache('resultsScreen.mods.name', resultsScreen.mods.name, (modsName) => {
             const modContainer = document.getElementById("modContainer");
@@ -692,9 +631,10 @@ function renderSlots() {
                         document.getElementById(`lb_Positions_slot${i}`).setAttribute('class', `positions N${i}`);
                     };
                 };
+            if (cache['LBEnabled'] === true && currentplayerCont) {
+                recalcLbWidth();
+            }
         };
-
-        setStyle(strainGraph, 'transform', cache['h100'] > 0 || cache['h50'] > 0 || cache['h0'] > 0 || cache['katu'] > 0 && cache['mode'] === `mania` ? `translateY(-10px)` : `translateY(0px)`);
 
         if (cache['beatmap.time.mp3Length'] && cache['beatmap.time.mp3Length'] > 0) {
             progressbar = (cache['beatmap.time.live'] / cache['beatmap.time.mp3Length']) * 380;
@@ -739,6 +679,7 @@ function renderSlots() {
             if (cache['play.score'] >= tempMapScores[playerPosition - 2]) {
               playerPosition--
               if (playerPosition < 8) {
+              if (lbcpLineDir === 'down') lbcpLineHeight = 30;
               lbcpLineHeight += 64;
               lbcpLineDir = 'up';
               setStyle(lbcpLine, 'transition', `350ms ease`);
@@ -756,6 +697,7 @@ function renderSlots() {
             else if (cache['play.score'] < tempMapScores[playerPosition - 1]) {
               playerPosition++
               if (playerPosition < 8) {
+              if (lbcpLineDir === 'up') lbcpLineHeight = 30;
               lbcpLineHeight += 64;
               lbcpLineDir = 'down';
               setStyle(lbcpLine, 'transition', `350ms ease`);
@@ -772,7 +714,7 @@ function renderSlots() {
             }
         }
 
-        const shouldShow = ((cache['data.menu.state'] === 2 && cache['beatmap.time.live'] >= cache['beatmap.time.lastObject'] + 1000) || cache['data.menu.state'] === 7) && !cache['HidePanel'];
+        const shouldShow = ((cache['data.menu.state'] === 2 && cache['beatmap.time.live'] >= cache['beatmap.time.lastObject'] + 500) || cache['data.menu.state'] === 7) && !cache['HidePanel'];
         const shouldHide = !((cache['data.menu.state'] === 2 && cache['beatmap.time.live'] >= cache['beatmap.time.lastObject'] - 500) || cache['data.menu.state'] === 7) || cache['HidePanel'];
 
         if (shouldShow && !rankingPanelSet) setupRankingPanel();
@@ -1002,9 +944,9 @@ socket.api_v2_precise((data) => {
             tempAvg = tempAvg * 0.9 + tempSmooth[a] * 0.1;
           }
 
-          tickPos = hitErrors[tempHitErrorArrayLength - 1] / 2 * 3.5;
+          tickPos = hitErrors[tempHitErrorArrayLength - 1] / 2 * 4;
           currentErrorValue = hitErrors[tempHitErrorArrayLength - 1];
-          setStyle(avgHitError, 'transform', `translateX(${(tempAvg / 2) * 3.5}px)`);
+          setStyle(avgHitError, 'transform', `translateX(${(tempAvg / 2) * 4}px)`);
 
           const tick = document.createElement("div");
           tick.id = `tick${tempHitErrorArrayLength}`;
@@ -1274,6 +1216,102 @@ function setRanks(userData) {
     };
 };
 
+const LB_WIDTH_OFFSET = 40;  
+
+function measureNaturalWidth(el) {
+  if (!el) return 0;
+
+  const clone = el.cloneNode(true);
+  const computedStyle = window.getComputedStyle(el);
+  clone.style.position = 'absolute';
+  clone.style.visibility = 'hidden';
+  clone.style.pointerEvents = 'none';
+  clone.style.transition = 'none';
+  clone.style.width = 'fit-content';
+  clone.style.minWidth = '0';
+  clone.style.maxWidth = 'none';
+  clone.style.fontFamily = computedStyle.fontFamily;
+  clone.style.fontSize = computedStyle.fontSize;
+  clone.style.fontStyle = computedStyle.fontStyle;
+  clone.style.fontWeight = computedStyle.fontWeight;
+  clone.style.letterSpacing = computedStyle.letterSpacing;
+  clone.style.lineHeight = computedStyle.lineHeight;
+  clone.style.whiteSpace = computedStyle.whiteSpace;
+  clone.style.left = '-9999px';
+  clone.style.top = '0';
+  document.body.appendChild(clone);
+
+  const width = clone.getBoundingClientRect().width || clone.scrollWidth;
+  document.body.removeChild(clone);
+  return width;
+}
+
+function getActiveLbRows() {
+  const rows = [];
+  const lastSlot = tempSlotLength || 0;
+  const windowStart = playerPosition >= 8 ? Math.max(1, playerPosition - 7) : 1;
+  const windowEnd = playerPosition >= 8 ? playerPosition - 1 : Math.min(7, lastSlot);
+
+  for (let i = windowStart; i <= windowEnd; i++) {
+    const el = document.getElementById(`playerslot${i}`);
+    if (el) rows.push(el);
+  }
+
+  if (currentplayerCont) rows.push(currentplayerCont);
+  return rows;
+}
+
+function getLbColumnElements(rows, selector) {
+  return rows.flatMap(row => Array.from(row.querySelectorAll(selector)));
+}
+
+function syncLbColumnWidths(selector, sourceEls, minWidth, shouldMeasure = () => true) {
+  const targetEls = Array.from(document.querySelectorAll(selector));
+  if (targetEls.length === 0) return minWidth;
+
+  const candidates = (sourceEls.length > 0 ? sourceEls : targetEls).filter(shouldMeasure);
+  const width = candidates.length > 0
+    ? Math.max(minWidth, ...candidates.map(el => Math.ceil(measureNaturalWidth(el))))
+    : minWidth;
+  const nextWidth = `${width}px`;
+
+  targetEls.forEach(el => {
+    setStyle(el, 'width', nextWidth);
+  });
+
+  return width;
+}
+
+function recalcLbWidth() {
+  const activeRows = getActiveLbRows();
+
+  const numberWidth = syncLbColumnWidths(
+    '.lb_Number',
+    getLbColumnElements(activeRows, '.lb_Number'),
+    0
+  );
+
+  if (numberWidth !== lastLbNumberWidth) {
+    lastLbNumberWidth = numberWidth;
+    lastLbWidth = null;
+  }
+
+  let maxWidth = 0;
+
+  activeRows.forEach(el => {
+    maxWidth = Math.max(maxWidth, measureNaturalWidth(el));
+  });
+
+  if (maxWidth > 0) {
+    const finalWidth = Math.ceil(maxWidth + LB_WIDTH_OFFSET);
+    if (finalWidth === lastLbWidth) return;
+    lastLbWidth = finalWidth;
+    document.querySelectorAll('.lbBox').forEach(el => {
+      el.style.width = `${finalWidth}px`;
+    });
+  }
+}
+
 function renderLeaderboard(entries, { fillTempScores = false } = {}) {
     tempSlotLength = entries.length;
     playerPosition = entries.length;
@@ -1303,17 +1341,17 @@ function renderLeaderboard(entries, { fillTempScores = false } = {}) {
 
         const playerStats = `
                     <div id="lb_Stats_slot${i}" class="lb_Stats">
-                        <div id="lb_StatsLeft_slot${i}" class="lb_StatsLeft">
+                        <div id="lb_StatsLeft_slot${i}" class="lb_StatsTop">
                             <div id="lb_Name_slot${i}" class="lb_Name">${entry.name}</div>
-                            <div id="lb_Score_slot${i}">${formatNumber(entry.score)}</div>
-                        </div>
-                        <div id="lb_StatsMiddle_slot${i}" class="lb_StatsMiddle">
-                            <div id="lb_Combo_slot${i}" class="lb_Combo">${spaceit(entry.comboMax)}x</div>
-                            <div id="lb_Miss_slot${i}" class="lb_Miss">${entry.misses}</div>
-                        </div>
-                        <div id="lb_StatsRight_slot${i}" class="lb_StatsRight">
                             <div id="lb_PP_slot${i}" class="lb_PP">${spaceit(Math.round(entry.pp))}pp</div>
-                            <div id="lb_Acc_slot${i}">${entry.acc}%</div>
+                        </div>
+                        <div id="lb_StatsMiddle_slot${i}" class="lb_StatsBottom">
+                            <div id="lb_Score_slot${i}" class="lb_Score">${formatNumber(entry.score)}</div>
+                              <div class="MissACombo">
+                                  <div id="lb_Combo_slot${i}" class="lb_Combo">${spaceit(entry.comboMax)}x</div>
+                                  <div id="lb_Miss_slot${i}" class="lb_Miss">${entry.misses}</div>
+                              </div>
+                            <div id="lb_Acc_slot${i}" class="lb_Acc">${Number(entry.acc)}%</div>
                         </div>
                     </div>
         `;
@@ -1353,6 +1391,7 @@ function renderLeaderboard(entries, { fillTempScores = false } = {}) {
         if (entry.highlight) {document.getElementById(`lb_Name_slot${i}`).setAttribute("class", "lb_Name bluelight")};
         if (entry.misses === 0) {setStyle(document.getElementById(`lb_Miss_slot${i}`), 'display', `none`)};
     };
+  recalcLbWidth();
 }
 
 async function setupMapScores(beatmapID) {
@@ -1387,6 +1426,8 @@ async function setupMapScores(beatmapID) {
 function LBReset() {
     leaderboardFetch = false;
     leaderboardLocalSet = false;
+    lastLbWidth = null;
+    lastLbNumberWidth = null;
     tempSlotLength = 0;
     playerPosition = 1;
     setHTML(lbopCont, "");

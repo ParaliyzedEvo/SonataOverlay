@@ -64,17 +64,17 @@
                         <div id="lbcpRanking" class="lb_Rank"></div>
                     </div>
                     <div class="lb_Stats">
-                        <div class="lb_StatsLeft">
+                        <div class="lb_StatsTop">
                             <div id="lbcpName" class="lb_Name"></div>
-                            <div id="lbcpScore"></div>
-                        </div>
-                        <div class="lb_StatsMiddle">
-                            <div id="lbcpCombo" class="lb_Combo"></div>
-                            <div id="lbcpMiss" class="lb_Miss"></div>
-                        </div>
-                        <div class="lb_StatsRight">
                             <div id="lbcpPP" class="lb_PP"></div>
-                            <div id="lbcpAcc"></div>
+                        </div>
+                        <div class="lb_StatsBottom">
+                            <div id="lbcpScore" class="lb_Score"></div>
+                                <div class="MissACombo">
+                                    <div id="lbcpCombo" class="lb_Combo"></div>
+                                    <div id="lbcpMiss" class="lb_Miss"></div>
+                                </div>
+                            <div id="lbcpAcc" class="lb_Acc"></div>
                         </div>
                     </div>
                     <div id="lbcpMods" class="lb_Mods"></div>
@@ -91,9 +91,6 @@
                             <canvas class="chart2 darker2" width="380" height="160"></canvas>
                             <canvas class="chart2 lighter2" width="380" height="160"></canvas>
                         </div>
-                    </div>
-                    <div id="graphkatu">
-                        <div id="progresskatu" class="tickkatup tickGraph"></div>
                     </div>
                     <div id="graph100">
                         <div id="progress100" class="tick100p tickGraph"></div>
@@ -117,9 +114,6 @@
 				</div>
 			</div>
             <div id="judgeInfo" class="accInfo">
-                <div id="katuCont" class="accCont">
-                    <div id="katuText" class="accText"></div>
-                </div>
                 <div id="h100Cont" class="accCont">
                     <div id="h100Text" class="accText"></div>
                 </div>
@@ -223,7 +217,6 @@
                 </div>
             </div>
             <div id="KeyOverlayCont">
-                <!-- KeyOverlay by ck. (Modified) -->
                 <div id="keyOverlay" class="--top -right KeyRelative">
                     <div class="main">
                       <div class="keys k1 hidden">
@@ -459,7 +452,6 @@
         <svg width="0" height="0">
 			<defs>
 			  <clipPath id="myClip">
-				<!-- <polygon points="2200,1380 2560,1380 2560,1440 2200,1440"/> -->
 				<polygon points="2460,600 2560,600 2560,1000 2460,1000"/>
 			  </clipPath>
 			</defs>
