@@ -45,7 +45,6 @@ No new preview for now :v
 <a href="https://www.star-history.com/?repos=Paraliyzedevo%2FEvosOverlay&type=date&legend=top-left">
  <picture>
    <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/chart?repos=Paraliyzedevo/EvosOverlay&type=date&theme=dark&legend=top-left&sealed_token=KzOF0DVipN5811ONmLOfft5k8YmdMC3kTnW49BFPNyMV7Tfgi5E7IdBYuQkuVx9QPNwD035juJUqQclIhY2NkwpoKwToRCwuPV_G-aRtmkVxihfc5nxfGg" />
-   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/chart?repos=Paraliyzedevo/EvosOverlay&type=date&legend=top-left&sealed_token=KzOF0DVipN5811ONmLOfft5k8YmdMC3kTnW49BFPNyMV7Tfgi5E7IdBYuQkuVx9QPNwD035juJUqQclIhY2NkwpoKwToRCwuPV_G-aRtmkVxihfc5nxfGg" />
    <img alt="Star History Chart" src="https://api.star-history.com/chart?repos=Paraliyzedevo/EvosOverlay&type=date&legend=top-left&sealed_token=KzOF0DVipN5811ONmLOfft5k8YmdMC3kTnW49BFPNyMV7Tfgi5E7IdBYuQkuVx9QPNwD035juJUqQclIhY2NkwpoKwToRCwuPV_G-aRtmkVxihfc5nxfGg" />
  </picture>
 </a>
