@@ -2,7 +2,7 @@ import WebSocketManager from './js/socket.js';
 import CanvasKeys from './js/canvas.js';
 import {createChartConfig, createChartConfig2, toChartData, FAST_SMOOTH_TYPE_MULTIPLE_WIDTH, FAST_SMOOTH_TYPE_NO_SMOOTHING, fastSmooth, max} from "./js/graph.js";
 import {hitJudgementsAdd, hitJudgementsClear, tapJudgement, cache, VALID_MODS, updateCache, updateCacheKeys, setText, setHTML, setStyle} from "./js/setups_functions.js";
-import {getMapScores, getUserDataSet, getUserTop, postUserID, getModsScores, postCustomID, postDefaultID} from "./js/api_functions.js";
+import {getMapScores, getUserDataSet, getModsScores, postCustomID, postDefaultID} from "./js/api_functions.js";
 
 const socket = new WebSocketManager(window.location.host, {
   onOpen: () => {
@@ -148,13 +148,18 @@ window.onload = () => {
   });
 };
 
+let settingsReadyResolve;
+const settingsReady = new Promise((resolve) => { settingsReadyResolve = resolve; });
+const settingsTimeout = new Promise((resolve) => setTimeout(resolve, 5000));
+
 socket.sendCommand('getSettings', encodeURI(window.COUNTER_PATH));
 socket.commands((data) => {
     try {
       const { command, message } = data;
       if (command === 'getSettings') {
         console.log(command, message);
-      }
+        settingsReadyResolve();
+      };
 
       updateCacheKeys(
         [
@@ -987,52 +992,69 @@ socket.api_v2_precise((data) => {
 }, ['hitErrors', 'keys']);
 
 async function setupUser(name) {
-  let userData = await getUserDataSet(name, cache['mode']);
-  let playerBest;
-  let avatarColor, Colors;
+  await Promise.race([settingsReady, settingsTimeout]);
 
-  if (userData.error === null || (LocalNameData === cache['LocalName'] && LocalResultNameData === cache['LocalName'])) {
-    userData = {
-      "id": `19637339`,
-      "statistics": {
-        "global_rank": `${cache['GBrank'] > 0 ? cache['GBrank'] : spaceit(cache['profile.globalRank'])}`,
-        "pp": `${cache['ppGB'] > 0 ? cache['ppGB'] : cache['profile.pp']}`,
-        "country_rank": `${cache['CTrank']}`,
+  const ignoreName = [ cache['profile.name'], "HosizoraN", "", "Guest", "osu!", "mekkadosu!", "salad!", "osu!topus!" ];
+
+  let dataPlayer = !ignoreName.includes(name) ? await getUserDataSet(name, cache['mode']) : null;
+  let Colors;
+  
+  if (dataPlayer === null || dataPlayer.error === true || (LocalNameData === cache['LocalName'] && LocalResultNameData === cache['LocalName'])) {
+    dataPlayer = {
+      data: {
+        "id": `12351533`,
+        "statistics": {
+          "global_rank": `${cache['GBrank'] > 0 ? cache['GBrank'] : spaceit(cache['profile.globalRank']) || 0}`,
+          "pp": `${cache['ppGB'] > 0 ? cache['ppGB'] : cache['profile.pp'] || 0}`,
+          "country_rank": `${cache['CTrank'] || 0}`,
+        },
+        "country_code": `${cache['CTcode'] !== '__' ? cache['CTcode'] : cache['profile.countryCode.name'] || '__'}`,
       },
-      "country_code": `${cache['CTcode'] !== `__` ? cache['CTcode'] : cache['profile.countryCode.name']}`,
+      databest: handleLocalPlayerBest(),
+      color: cache['ColorSet'] === 'API' ?
+        cache['CustomIDSet'] && cache['CustomIDColor'] ? await postCustomID(cache['CustomIDSet'].replace("/", "+"))
+        : cache['gamerlocal'] ? 
+        {
+          "HSLVibrant": [
+            0.5725490196078432,
+            0.8173076923076924
+          ],
+          "HSLLightVibrant": [
+            0.6273148148148148,
+            0.5714285714285714
+          ], 
+        } 
+        : await postDefaultID(`${cache['server']}+${cache['profile.id']}`) :
+        {
+          "HSLVibrant": [
+            cache['HueID'] ? Number(cache['HueID'] / 360) : 0,
+            cache['SaturationID'] ? Number(cache['SaturationID'] / 100) : 0
+          ],
+          "HSLLightVibrant": [
+            cache['HueID2'] ? Number(cache['HueID2'] / 360) : 0,
+            cache['SaturationID2'] ? Number(cache['SaturationID2'] / 100) : 0
+          ],
+        } 
     };
-    playerBest = handleLocalPlayerBest();
-  } else {
-    playerBest = await getUserTop(userData.id, cache['mode']);
   };
+  console.log(dataPlayer)
+
+  let userData = dataPlayer.data;
+  let playerBest = dataPlayer.databest;
+  let avatarColor = dataPlayer.color;
 
   setUserAvatar(userData);
   setCountryFlag(userData);
   setRanks(userData);
 
-  if (cache['ColorSet'] === 'API') {
-    if (cache['CustomIDSet'] !== "" && cache['CustomIDColor']) {
-      avatarColor = await postCustomID(cache['CustomIDSet'].replace("/", "+"));
-    } else {
-      avatarColor = userData.id !== `19637339`
-        ? await postUserID(userData.id)
-        : await postDefaultID(`${cache['server']}+${cache['profile.id']}`);
-    }
-
-    Colors = {
-      ColorData1: `${avatarColor.HSLVibrant[0] * 360}, ${avatarColor.HSLVibrant[1] * 100}%, 50%`,
-      ColorData2: `${avatarColor.HSLLightVibrant[0] * 360}, ${avatarColor.HSLLightVibrant[1] * 100}%, 75%`,
-      ColorResultLight: `${avatarColor.HSLVibrant[0] * 360}, ${avatarColor.HSLLightVibrant[1] * 100}%, 82%`,
-      ColorResultDark: `${avatarColor.HSLVibrant[0] * 360}, ${avatarColor.HSLLightVibrant[1] * 100}%, 6%`
-    };
-  } else {
-    Colors = {
-      ColorData1: `${cache['HueID']}, ${cache['SaturationID']}%, 50%`,
-      ColorData2: `${cache['HueID2']}, ${cache['SaturationID2']}%, 50%`,
-      ColorResultLight: `${cache['HueID']}, ${cache['SaturationID']}%, 82%`,
-      ColorResultDark: `${cache['HueID']}, ${cache['SaturationID']}%, 6%`
-    };
-  }
+  Colors = {
+    ColorData1: `${avatarColor.HSLVibrant[0] * 360}, ${avatarColor.HSLVibrant[1] * 100}%, 50%`,
+    ColorData2: `${avatarColor.HSLLightVibrant[0] * 360}, ${avatarColor.HSLLightVibrant[1] * 100}%, 50%`,
+    ColorResultLight: `${avatarColor.HSLVibrant[0] * 360}, ${avatarColor.HSLVibrant[1] * 100}%, 82%`,
+    ColorResultDark: `${avatarColor.HSLVibrant[0] * 360}, ${avatarColor.HSLVibrant[1] * 100}%, 6%`,
+    ColorResultLight2: `${avatarColor.HSLLightVibrant[0] * 360}, ${avatarColor.HSLLightVibrant[1] * 100}%, 82%`,
+    ColorResultDark2: `${avatarColor.HSLLightVibrant[0] * 360}, ${avatarColor.HSLLightVibrant[1] * 100}%, 6%`,
+  };
 
   for (let i = 0; i < 6; i++) {
     setupTopPlay(i, playerBest, Colors);
@@ -1118,6 +1140,8 @@ function handleLocalPlayerBest() {
       "mods_id": cache[`modsid${key}`],
       "rank": cache[`rankResult${key}`],
       "ended_at": cache[`date${key}`],
+      "legacy_score_id": 0,
+      "id": 0,
     };
     return acc;
   }, {});
@@ -1169,12 +1193,13 @@ async function setupTopPlay(index, playerBest, Colors) {
     setHTML(document.getElementById(`TopMods${i + 1}`), "");
   };
 
-  if (topPlay.legacy_score_id === cache['resultsScreen.scoreId'] && cache.ColorSet === "API") {
+  if ((topPlay.legacy_score_id !== 0 || topPlay.id !== 0) && (topPlay.legacy_score_id === cache['resultsScreen.scoreId'] || topPlay.id === cache['resultsScreen.scoreId']) && cache.ColorSet === "API") {
       setStyle(document.getElementById(`Top${i + 1}`), 'outlineColor', `hsl(${Colors.ColorResultLight})`);
   } else {
       setStyle(document.getElementById(`Top${i + 1}`), 'outlineColor', `rgba(0, 0, 0, 0)`);
   };
 };
+
 
 function setUserAvatar(userData) {
   let avatarUrl;
