@@ -994,7 +994,7 @@ socket.api_v2_precise((data) => {
 async function setupUser(name) {
   await Promise.race([settingsReady, settingsTimeout]);
 
-  const ignoreName = [ cache['profile.name'], "HosizoraN", "", "Guest", "osu!", "mekkadosu!", "salad!", "osu!topus!" ];
+  const ignoreName = [ "", "Guest", "osu!", "mekkadosu!", "salad!", "osu!topus!" ];
 
   let dataPlayer = !ignoreName.includes(name) ? await getUserDataSet(name, cache['mode']) : null;
   let Colors;
