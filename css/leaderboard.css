@@ -114,7 +114,7 @@
     height: 40px;
 	border-radius: 10px;
     background-color: #ffffff;
-    transition: ease 300ms;
+    transition: ease 400ms;
     transform: translateY(15px);
     align-self: flex-start;
     z-index: 2;

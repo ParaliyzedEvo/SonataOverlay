@@ -682,12 +682,12 @@ socket.commands((data) => {
               if (lbcpLineDir === 'down') lbcpLineHeight = 30;
               lbcpLineHeight += 64;
               lbcpLineDir = 'up';
-              setStyle(lbcpLine, 'transition', `350ms ease`);
+              setStyle(lbcpLine, 'transition', `400ms ease`);
               setStyle(lbcpLine, 'height', `${lbcpLineHeight}px`);
               setStyle(lbcpLine, 'transform', getLbcpLineTransform(lbcpLineDir, lbcpLineHeight));
               if (linetimeout) clearTimeout(linetimeout)
                 linetimeout = setTimeout(() => {
-                  setStyle(lbcpLine, 'transition', `200ms ease`);
+                  setStyle(lbcpLine, 'transition', `250ms ease`);
                   lbcpLineHeight = 40;
                   setStyle(lbcpLine, 'height', `40px`);
                   setStyle(lbcpLine, 'transform', getLbcpLineTransform(lbcpLineDir));
@@ -700,12 +700,12 @@ socket.commands((data) => {
               if (lbcpLineDir === 'up') lbcpLineHeight = 30;
               lbcpLineHeight += 64;
               lbcpLineDir = 'down';
-              setStyle(lbcpLine, 'transition', `350ms ease`);
+              setStyle(lbcpLine, 'transition', `400ms ease`);
               setStyle(lbcpLine, 'height', `${lbcpLineHeight}px`);
               setStyle(lbcpLine, 'transform', getLbcpLineTransform(lbcpLineDir, lbcpLineHeight));
               if (linetimeout) clearTimeout(linetimeout)
                 linetimeout = setTimeout(() => {
-                  setStyle(lbcpLine, 'transition', `200ms ease`);
+                  setStyle(lbcpLine, 'transition', `250ms ease`);
                   lbcpLineHeight = 40;
                   setStyle(lbcpLine, 'height', `40px`);
                   setStyle(lbcpLine, 'transform', getLbcpLineTransform(lbcpLineDir));
