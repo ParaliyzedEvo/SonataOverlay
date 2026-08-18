@@ -1002,7 +1002,7 @@ async function setupUser(name) {
   if (dataPlayer === null || dataPlayer.error === true || (LocalNameData === cache['LocalName'] && LocalResultNameData === cache['LocalName'])) {
     dataPlayer = {
       data: {
-        "id": `12351533`,
+        "id": `19637339`,
         "statistics": {
           "global_rank": `${cache['GBrank'] > 0 ? cache['GBrank'] : spaceit(cache['profile.globalRank']) || 0}`,
           "pp": `${cache['ppGB'] > 0 ? cache['ppGB'] : cache['profile.pp'] || 0}`,
