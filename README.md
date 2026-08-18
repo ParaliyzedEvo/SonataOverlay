@@ -8,11 +8,14 @@
 | Compatible with | tosu |
 | Size |  2560x1440 |
 
+## Main
+<img width="1920" height="1080" alt="Screenshot 2026-08-17 21-52-26" src="https://github.com/user-attachments/assets/09dc702a-ee38-4d65-acd2-60ec16aff0b5" />
+
 ## Gameplay
-<img src="https://github.com/ParaliyzedEvo/counters/blob/master/.github/images/sonataoverlay%20by%20paraliyzed_evo.png?raw=true" />
+<img width="1920" height="1080" alt="Screenshot 2026-08-17 21-55-56" src="https://github.com/user-attachments/assets/845c049c-777f-40ea-ab2d-0816681d00d6" />
 
 ## Results
-<img src="https://github.com/ParaliyzedEvo/counters/blob/master/.github/images/sonataoverlay%20by%20paraliyzed_evo1.png?raw=true" />
+<img width="1920" height="1080" alt="Screenshot 2026-08-17 21-59-23" src="https://github.com/user-attachments/assets/0954e7ca-8620-4c04-8f72-a536bb8503e8" />
 
 [![CodeFactor](https://www.codefactor.io/repository/github/paraliyzedevo/evosoverlay/badge)](https://www.codefactor.io/repository/github/paraliyzedevo/evosoverlay)
 [![Website](https://img.shields.io/badge/-Website-6a0dad?style=flat&logo=osu&logoColor=FFFFFF&labelColor=ff1493&color=6a0dad)](https://paraliyzed.net/)
@@ -33,8 +36,6 @@ Settings for replays (ingame):
 ![{030E31E1-F10F-440F-8A60-ED36D18953A1}](https://github.com/user-attachments/assets/41810590-f46c-4f4a-a6f2-348392db0b40)
 
 ![{B73124DB-8295-44E4-821B-CF4684BC5A98}](https://github.com/user-attachments/assets/5c95e9f3-999e-45af-b1bf-86200a6e011d)
-
-No new preview for now :v
 
 ## Security
 - This project does not ship any osu! API credentials to anyone.
