@@ -1,4 +1,7 @@
-export const API_BASE = "http://localhost:8080/api"
+const API_BASE = "https://osu-api.paraliyzed.net/api"
+//Alternate API (if main API is down...)
+//https://phubahosi.up.railway.app/api
+//https://sonataaltapi.vercel.app/api
 
 export async function getUserDataSet(id, mode) {
     try {
