@@ -51,11 +51,11 @@
     position: absolute;
   }
   .odometer.odometer-auto-theme.odometer-animating-up .odometer-ribbon-inner, .odometer.odometer-theme-default.odometer-animating-up .odometer-ribbon-inner {
-    -webkit-transition: -webkit-transform 170ms;
-    -moz-transition: -moz-transform 170ms;
-    -ms-transition: -ms-transform 170ms;
-    -o-transition: -o-transform 170ms;
-    transition: transform 170ms;
+    -webkit-transition: -webkit-transform 200ms;
+    -moz-transition: -moz-transform 200ms;
+    -ms-transition: -ms-transform 200ms;
+    -o-transition: -o-transform 200ms;
+    transition: transform 200ms;
   }
   .odometer.odometer-auto-theme.odometer-animating-up.odometer-animating .odometer-ribbon-inner, .odometer.odometer-theme-default.odometer-animating-up.odometer-animating .odometer-ribbon-inner {
     -webkit-transform: translateY(-100%);
@@ -72,11 +72,11 @@
     transform: translateY(-100%);
   }
   .odometer.odometer-auto-theme.odometer-animating-down.odometer-animating .odometer-ribbon-inner, .odometer.odometer-theme-default.odometer-animating-down.odometer-animating .odometer-ribbon-inner {
-    -webkit-transition: -webkit-transform 170ms;
-    -moz-transition: -moz-transform 170ms;
-    -ms-transition: -ms-transform 170ms;
-    -o-transition: -o-transform 170ms;
-    transition: transform 170ms;
+    -webkit-transition: -webkit-transform 200ms;
+    -moz-transition: -moz-transform 200ms;
+    -ms-transition: -ms-transform 200ms;
+    -o-transition: -o-transform 200ms;
+    transition: transform 200ms;
     -webkit-transform: translateY(0);
     -moz-transform: translateY(0);
     -ms-transform: translateY(0);
@@ -85,8 +85,13 @@
   }
   
   .odometer.odometer-auto-theme, .odometer.odometer-theme-default {
-    line-height: 1.1em;
+    line-height: 1.2em;
   }
+
+  .odometer.acc .odometer-inside:after {
+    content: "%"
+  }
+  
   .odometer.odometer-auto-theme .odometer-value, .odometer.odometer-theme-default .odometer-value {
     text-align: center;
   }

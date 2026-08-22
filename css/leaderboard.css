@@ -1,8 +1,10 @@
-#leaderboard {
-    position: relative;
-    bottom: 350px;
+#leaderboardP {
+    position: absolute;
+    bottom: 600px;
+    left: 10px;
     z-index: 1;
     transition: ease 500ms;
+    opacity: 0;
 }
 #otherplayerCont {
     position: absolute;
@@ -18,25 +20,35 @@
     display: flex;
     flex-direction: column-reverse;
     gap: 5px;
-    transition: ease 500ms;
+    transition: ease 350ms;
 }
 .lbBox {
     position: absolute;
-    width: 358px;
+    min-width: 358px;
     height: 68px;
     background-color: black;
     border-radius: 10px;
     display: flex;
     align-items: center;
     overflow: visible;
-    transition: ease 500ms;
+    transition: ease 400ms;
+    padding-right: 20px;
+    box-sizing: border-box;
+}
+.lb_Miss {
+    color: #ff6767;
+    text-shadow: 0 0 10px #ff6767;
 }
 .lb_Number {
-    width: 40px;
-    height: 60px;
     display: flex;
+    flex: 0 0 auto;
+    box-sizing: border-box;
+    padding-left: 12px;
+    padding-right: 12px;
+    height: 60px;
     justify-content: center;
     align-items: center;
+    transition: ease 400ms;
 }
 .positions {
     font-size: 20px;
@@ -48,67 +60,63 @@
     background-size: 100%;
     background-repeat: no-repeat;
     background-position: 50% 50%;
+    flex-shrink: 0;
 }
 .lb_Rank {
     position: relative;
     font-size: 20px;
     text-align: right;
-    top: 30px;
+    top: 25px;
+    right: 3px;
 }
 .lb_Stats {
     position: relative;
     left: 8px;
-    width: 270px;
-    height: 55px;
-    line-height: 25px;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: space-between;
     font-size: 18px;
-    color: #9e9e9e;
-}
-.lb_Acc {
-    font-size: 17px;
+    color: #828281;
+    white-space: nowrap;
 }
 .lb_PP {
     font-size: 22px;
-    font-weight: 600;
+    font-weight: 800;
 }
-.lb_StatsRight {
-    text-align: right;
+.loved {
+    color: pink;
 }
-.lb_Combo {
-    position: absolute;
-    bottom: 0;
-    right: 115px;
-    text-align: right;
+.qualified {
+    color: greenyellow;
 }
-.lb_StatsLeft,
-.lb_StatsRight {
-    position: absolute;
-    bottom: 0;
-    width: 250px;
+.lb_StatsTop,
+.lb_StatsBottom {
+    display: flex;
+    transition: ease 400ms;
+    justify-content: space-between;
 }
 .lb_Name {
     color: white;
     font-size: 22px;
-    width: 150px;
     overflow: hidden;
-    white-space: nowrap;
     text-overflow: ellipsis;
+    font-weight: 600;
 }
 .bluelight {
     color: #71cdff;
 }
 #lbcpLine {
     position: absolute;
-    top: 20px;
-    left: -12px;
+    left: -13px;
     width: 7px;
-    height: 35px;
+    height: 40px;
 	border-radius: 10px;
-    background-color: #363636;
-    transition: ease 500ms;
-    flex-basis: auto;
-    display: flex;
-    flex-direction: column;
+    background-color: #ffffff;
+    transition: ease 400ms;
+    transform: translateY(15px);
+    align-self: flex-start;
+    z-index: 2;
 }
 .lb_Mods {
     position: absolute;
@@ -118,15 +126,85 @@
     display: flex;
     justify-content: flex-start;
 }
+
+.lb_Score {
+    width: 60px;
+}
+.lb_Acc {
+    width: 100px;
+    text-align: right;
+}
+
+.MissACombo {
+    display: flex;
+    flex: 1;
+    gap: 8px;
+    justify-content: flex-end;
+}
+
 .modslb {
 	width: 40px;
 	height: 27px;
-    border-radius: 6px;
+    border-radius: 5px;
     object-fit: cover;
-	background-size: 105%;
+	background-size: 90%;
     background-position: 50% 50%;
     background-repeat: no-repeat;
     margin-right: -15px;
+    background-color: #161616;
+    outline: 4px solid #161616;
+    border: 2px solid #ffffff;
+}
+
+.HR {
+    background-color: #190505;
+    outline: 4px solid #190505;
+    border: 2px solid #ffa1a1;
+}
+.NC {
+    background-color: #170519;
+    outline: 4px solid #170519;
+    border: 2px solid #f1a1ff;
+}
+.HD {
+    background-color: #191505;
+    outline: 4px solid #191505;
+    border: 2px solid #fcf5a5;
+}
+.DT {
+    background-color: #120519;
+    outline: 4px solid #120519;
+    border: 2px solid #daa1ff;
+}
+.SD {
+    background-color: #190e05;
+    outline: 4px solid #190e05;
+    border: 2px solid #ffd8a1;
+}
+.PF {
+    background-color: #191705;
+    outline: 4px solid #191705;
+    border: 2px solid #fffca1;
+}
+.HT {
+    background-color: #1e1e1e;
+    outline: 4px solid #1e1e1e;
+    border: 2px solid #a1a1a1;
+}
+.NF {
+    background-color: #050f19;
+    outline: 4px solid #050f19;
+    border: 2px solid #a1e3ff;
+}
+.SO {
+    background-color: #19050f;
+    outline: 4px solid #19050f;
+    border: 2px solid #c13b87;
+}
+.EZ {
+    background-color: #051911;
+    outline: 4px solid #051911;
+    border: 2px solid #a1ffd2;
 }
 
 .N3,
@@ -140,8 +218,8 @@
     filter: drop-shadow(0 0 10px #ff953e);
 }
 .N2 {
-    color: #ffffff;
-    filter: drop-shadow(0 0 10px #ffffff);
+    color: #d1f6ff;
+    filter: drop-shadow(0 0 10px #d1f6ff);
 }
 .N1 {
     color: #ffdc3e;

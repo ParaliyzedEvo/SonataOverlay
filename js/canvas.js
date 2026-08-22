@@ -11,7 +11,7 @@ class CanvasKeys {
     this.tile = null
 
     this.id = canvasID;
-    this.color = color || 'rgba(29, 29, 29, 0.8)';
+    this.color = color || 'rgb(29, 29, 29)';
 
     this.countUP = new CountUp(`${this.id}Bpm`, 0, 0, 0, 0.01, { useEasing: true, useGrouping: true, separator: "", decimal: "" });
 

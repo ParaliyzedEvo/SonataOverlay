@@ -1,61 +1,80 @@
-//API: phubahosi.vercel.app
+const API_BASE = "https://osu-api.paraliyzed.net/api"
+//Alternate API (if main API is down...)
+//https://phubahosi.up.railway.app/api
+//https://sonataaltapi.vercel.app/api
 
-export async function getUserDataSet(id) {
+export async function getUserDataSet(id, mode) {
     try {
         return (
-            await axios.get(`/user/${id}`, {
-                baseURL: "https://phubahosi.vercel.app/api",
+            await axios.get(`${API_BASE}/users/${id}?mode=${mode}`, {
+                baseURL: API_BASE,
             })
         )["data"];
     } catch (error) {
         console.error(error);
+        return { error: true };
     }
 }
-export async function postUserID(id) {
+
+export async function postCustomID(id) {
     try {
         let ColorData = null;
-        await axios.get(`https://phubahosi.vercel.app/api/color/${id}`).then((response) => {
-            ColorData = response.data
-        });
-        return ColorData;
+        const response = await axios.get(`${API_BASE}/color/customid/${id}/postimg`);
+        ColorData = response.data;
+        return ColorData ? ColorData : { error: true };
     } catch (error) {
         console.error(error);
+        return { error: true };
     }
 }
 
-export async function getUserTop(bestid) {
+export async function postDefaultID(id) {
     try {
-        return (
-            await axios.get(`/user/${bestid}/best`, {
-                baseURL: "https://phubahosi.vercel.app/api",
-            })
-        )["data"];
+        let ColorData = null;
+        const response = await axios.get(`${API_BASE}/color/default/${id}`);
+        ColorData = response.data;
+        return ColorData ? ColorData : { error: true };
     } catch (error) {
         console.error(error);
+        return { error: true };
+    }
+}
+
+export async function getMapScores(beatmapID, mode) {
+    try {
+        const data = (
+            await axios.get(`v1/beatmaps/scores/${beatmapID}?mode=${mode}`, {
+                baseURL: API_BASE,
+            })
+        )["data"];
+        return data.length !== 0 ? data : null;
+    } catch (error) {
+        console.error(error);
+        return { error: true };
     }
 }
 
 export async function getMapDataSet(beatmapID) {
     try {
         return (
-            await axios.get(`/beatmap/${beatmapID}`, {
-                baseURL: "https://phubahosi.vercel.app/api",
+            await axios.get(`/beatmaps/${beatmapID}`, {
+                baseURL: API_BASE,
             })
         )["data"];
     } catch (error) {
         console.error(error);
+        return { error: true };
     }
 }
 
-export async function getMapScores(beatmapID) {
+export async function getModsScores(beatmapID, modName, mode) {
     try {
-        const data = (
-            await axios.get(`/${beatmapID}/global`, {
-                baseURL: "https://phubahosi.vercel.app/api/beatmap",
-            })
-        )["data"];
-        return data.length !== 0 ? data : null;
+        const response = await axios.get(`v1/beatmaps/scores/${beatmapID}?mods=${modName}&mode=${mode}`, {
+            baseURL: API_BASE,
+        });
+        return response.data.length !== 0 ? response.data : null;
     } catch (error) {
         console.error(error);
+        return null;
     }
 }

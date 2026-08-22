@@ -1,3 +1,31 @@
+## EvosOverlay by Paraliyzed_evo
+
+<a href="https://osuck.link/redirect/https://files.osuck.link/tosu/sonataoverlay by paraliyzed_evo v1.22.zip" target="_blank"><img height="35" src="https://img.shields.io/badge/Download_PP_Counter-67A564?style=for-the-badge&logo=cloud&logoColor=white" /></a>  <a href="https://github.com/Paraliyzedevo" target="_blank"><img height="35" src="https://img.shields.io/badge/github-000000?style=for-the-badge&logo=github&logoColor=white" /></a>
+
+|||
+| ------------- | ------------- |
+| For | ingame, obs-overlay |
+| Compatible with | tosu |
+| Size |  2560x1440 |
+
+## Main
+<img width="1920" height="1080" alt="Screenshot 2026-08-17 21-52-26" src="https://github.com/user-attachments/assets/09dc702a-ee38-4d65-acd2-60ec16aff0b5" />
+
+## Gameplay
+<img width="1920" height="1080" alt="Screenshot 2026-08-17 21-55-56" src="https://github.com/user-attachments/assets/845c049c-777f-40ea-ab2d-0816681d00d6" />
+
+## Results
+<img width="1920" height="1080" alt="Screenshot 2026-08-17 21-59-23" src="https://github.com/user-attachments/assets/0954e7ca-8620-4c04-8f72-a536bb8503e8" />
+
+[![CodeFactor](https://www.codefactor.io/repository/github/paraliyzedevo/evosoverlay/badge)](https://www.codefactor.io/repository/github/paraliyzedevo/evosoverlay)
+[![Website](https://img.shields.io/badge/-Website-6a0dad?style=flat&logo=osu&logoColor=FFFFFF&labelColor=ff1493&color=6a0dad)](https://paraliyzed.net/)
+[![Donate](https://img.shields.io/badge/-Donate-FFDE21?style=flat&logo=paypal&logoColor=%23FFFFFF&labelColor=%2300c244&color=%2300c244)](https://paypal.me/Paraliyzedevo)
+
+Basically this repo is a fork (and maintained version) of the original Sonata Framework (the original overlay). Only reason I have this is me having this overlay for a few years and using it (via [tosu](https://github.com/tosuapp/tosu)) for videos and streams and problems arose with it and I fixed them. This code has my patches and extras included with this, but if you want to revert them, you can go look in the [source code](https://github.com/ParaliyzedEvo/SonotaOverlay/tree/source) and edit the overlay yourself.
+
+Report issues or feature ideas [here](https://github.com/ParaliyzedEvo/SonataOverlay/issues)
+
+## Instructions
 Settings for replays (ingame):
 - Go to skin file make sure empty the keyoverlay ingame like this:
 
@@ -9,5 +37,18 @@ Settings for replays (ingame):
 
 ![{B73124DB-8295-44E4-821B-CF4684BC5A98}](https://github.com/user-attachments/assets/5c95e9f3-999e-45af-b1bf-86200a6e011d)
 
-No new preview for now :v
+## Security
+- This project does not ship any osu! API credentials to anyone.
+- All API requests are made locally using user provided OAuth.
 
+## Star History
+
+<a href="https://www.star-history.com/?repos=Paraliyzedevo%2FEvosOverlay&type=date&legend=top-left">
+ <picture>
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/chart?repos=Paraliyzedevo/EvosOverlay&type=date&theme=dark&legend=top-left&sealed_token=KzOF0DVipN5811ONmLOfft5k8YmdMC3kTnW49BFPNyMV7Tfgi5E7IdBYuQkuVx9QPNwD035juJUqQclIhY2NkwpoKwToRCwuPV_G-aRtmkVxihfc5nxfGg" />
+   <img alt="Star History Chart" src="https://api.star-history.com/chart?repos=Paraliyzedevo/EvosOverlay&type=date&legend=top-left&sealed_token=KzOF0DVipN5811ONmLOfft5k8YmdMC3kTnW49BFPNyMV7Tfgi5E7IdBYuQkuVx9QPNwD035juJUqQclIhY2NkwpoKwToRCwuPV_G-aRtmkVxihfc5nxfGg" />
+ </picture>
+</a>
+   <img alt="Star History Chart" src="https://api.star-history.com/chart?repos=ParaliyzedEvo/EvosOverlay&type=date&legend=top-left&sealed_token=63_H9NqysMCH6yj0EfDGVNfQ2kdDo1yrvZMtlc2aKw2ZYyMVCaas4KjDa2TtaCa-RQ7a8cUIq-x1ZsvmolvpiEAf9Adf5q7soaIA43jrn00u29vabtCO-g" />
+ </picture>
+</a>

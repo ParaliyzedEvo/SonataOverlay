@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>Sonata Overlay!</title>
+        <title>Sonata Overlay!</title>
 		<meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -24,43 +24,64 @@
     </head>
     <body class="nunito-600">
         <div id="main">
-            <div id="CrashReportDebug" class="DebugBox crashpop">
-                <div id="CrashBorder" class="DebugBorder">
-                    <div id="SadFace"></div>
-                    <div id="CrashText" class="DebugText">Oh no...</div>
-                    <div id="CrashReason"></div>
+            <div id="DevInformation" class="DebugBox crashpop">
+                <div id="DevPics"></div>
+                <div id="DevVersion" class="DebugText">Sonata Production Overlay</div>
+                <div id="DevNotice">
+                    <div>Yuusei Suzue @ 2023</div>
+                    <li style="list-style-position: inside;"></li>
+                    <div id="devserver"></div>
                 </div>
             </div>
-            <img id="rankingPanelBG"></img>
+            <div id="CrashReportDebug" class="DebugBox crashpop">
+                <div id="SadFace"></div>
+                <div id="CrashText" class="DebugText">Oh no...</div>
+                <div id="CrashReason"></div>
+            </div>
 			<div id="mapBG"></div>
-            <div id="smallStats">
-                <div id="graphCont">
-                    <div id="leaderboard">
-                        <div id="lbcpLine"></div>
-                        <div id="otherplayerCont">
-                            <div id="lbopCont"></div>
-                        </div>
-                        <div id="currentplayerCont" class="lbBox">
-                            <div class="lb_Number">
-                                <div id="lbcpPosition" class="positions"></div>
-                            </div>
-                            <div id="lbcpAvatar" class="lb_Avatar">
-                                <div id="lbcpRanking" class="lb_Rank"></div>
-                            </div>
-                            <div class="lb_Stats">
-                                <div class="lb_StatsLeft">
-                                    <div id="lbcpName" class="lb_Name"></div>
-                                    <div id="lbcpScore"></div>
-                                </div>
-                                <div id="lbcpCombo" class="lb_Combo"></div>
-                                <div class="lb_StatsRight">
-                                    <div id="lbcpPP" class="lb_PP"></div>
-                                    <div id="lbcpAcc"></div>
-                                </div>
-                            </div>
-                            <div id="lbcpMods" class="lb_Mods"></div>
+            <div id="GameStatusOverlay">
+                <div id="PlayFailed"></div>
+                <div id="PlayPaused"></div>
+                <div id="PlayFocused">
+                    <div id="NoFocusBox" class="DebugBox">
+                        <div id="NoFocusBorder" class="DebugBorder">
+                            <div id="NoFocusImg"></div>
+                            <div>osu! is currently out of focused.</div>
                         </div>
                     </div>
+                </div>
+            </div>
+            <div id="leaderboardP">
+                <div id="otherplayerCont">
+                    <div id="lbopCont"></div>
+                </div>
+                <div id="currentplayerCont" class="lbBox">
+                    <div id="lbcpLine"></div>
+                    <div class="lb_Number">
+                        <div id="lbcpPosition" class="positions"></div>
+                    </div>
+                    <div id="lbcpAvatar" class="lb_Avatar">
+                        <div id="lbcpRanking" class="lb_Rank"></div>
+                    </div>
+                    <div class="lb_Stats">
+                        <div class="lb_StatsTop">
+                            <div id="lbcpName" class="lb_Name"></div>
+                            <div id="lbcpPP" class="lb_PP"></div>
+                        </div>
+                        <div class="lb_StatsBottom">
+                            <div id="lbcpScore" class="lb_Score"></div>
+                                <div class="MissACombo">
+                                    <div id="lbcpCombo" class="lb_Combo"></div>
+                                    <div id="lbcpMiss" class="lb_Miss"></div>
+                                </div>
+                            <div id="lbcpAcc" class="lb_Acc"></div>
+                        </div>
+                    </div>
+                    <div id="lbcpMods" class="lb_Mods"></div>
+                </div>
+            </div>
+            <div id="smallStats">
+                <div id="graphCont">
                     <div id="strainGraph">
                         <div id="basegraph">
                             <canvas class="chart darker" width="380" height="160"></canvas>
@@ -85,8 +106,8 @@
                     </div>
                 </div>
 				<div id="stars1">
-					<i class="fas fa-star"></i>
-					<span id="starsCurrent" class="odometer"></span>
+                    <i class="fas fa-star"></i>
+                    <span id="starsCurrent" class="odometer"></span>
 			    </div>
 				<div id="bpmd">
 					<span id="BPMlive" class="odometer"></span><span id="bpmflash" class="bpm">BPM</span>
@@ -151,261 +172,57 @@
                     </div>
                     <div id="username" class="otherContainer"></div>
                     <div id="playerPP" class="otherContainer"></div>
-                    <div id="SonataText"></div>
+                    <div id="SonataText">Sonata Overlay!</div>
                     <div id="BrandLogo"></div>
                 </div>
                 <div id="gpbottom">
-                    <div class="wrapper_1" id="pp_wrapper">
-                        <div class="pp" id="pp_box">
-                            <span class="text_1" id="pp_text" style="width: 500px;">
-                                <span class="odometer" id="pp_txt" style="transition-duration: 500ms; white-space: nowrap; overflow: hidden; text-overflow: clip;"></span> / 
-                                <span id="ppfc_txt"></span>pp
-                            </span>
-                        </div>
-                    </div>
-                    <div class="wrapper_2" id="combo_wrapper">
-                        <div class="combo_wrapper">
-                            <div class="combo" id="combo_box"></div>
-                            <div class="combo_handler" id="combo_text">
-                              <span class="text_2" id="combo_text2">
-                                <span class="odometer" id="combo_count"></span>
-                                <span id="combo_x" style="position: relative; right: 7px;">x</span>
-                              </span>
-                              <span class="text_2">
-                                <span id="combo_max" style="transition-duration: 500ms;"></span>
-                              </span>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="recorderContainer" class="Sriracha">
-                        <div class="DebugBorder">
-                            <div id="recorder"> </div>
-                            <div id="recorderName"></div>
-                        </div>
+                    <div id="recorderContainer" class="DebugBox Sriracha">
+                        <div id="recorder">Recorder:</div>
+                        <div id="recorderName"></div>
                     </div>
                     <div id="URIndex" class="odometer unstableRate"><b></b></div>
-					<div id="URText"><span style="font-weight: 800;">U</span>nstable <span style="font-weight: 800;">R</span>ate</div>
+					<div id="URText"><span style="font-weight: 600;">U</span>nstable <span style="font-weight: 600;">R</span>ate</div>
 					<div id="URCont">
+                        <div class="wrapper_2" id="combo_wrapper">
+                            <div class="combo_wrapper">
+                                <div class="combo" id="combo_box"></div>
+                                <div class="combo_handler" id="combo_text">
+                                <span class="text_2" id="combo_text2">
+                                    <span class="odometer" id="combo_count"></span>
+                                    <span id="combo_x" style="position: relative; right: 7px;">x</span>
+                                </span>
+                                <span class="text_2">
+                                    <span id="combo_max" style="transition: ease 500ms; position: relative; top: 2px;"></span>
+                                </span>
+                                </div>
+                            </div>
+                        </div>
 						<div id="URbar">
 							<div id="avgHitError"></div>
 							<div id="URmidbar"></div>
 							<div id="l50"></div>
 							<div id="l100"></div>
 							<div id="l300"></div>
-                            <div id="URTCont">
-                                <div id="tick0" class="tick"></div>
-                                <div id="tick1" class="tick"></div>
-                                <div id="tick2" class="tick"></div>
-                                <div id="tick3" class="tick"></div>
-                                <div id="tick4" class="tick"></div>
-                                <div id="tick5" class="tick"></div>
-                                <div id="tick6" class="tick"></div>
-                                <div id="tick7" class="tick"></div>
-                                <div id="tick8" class="tick"></div>
-                                <div id="tick9" class="tick"></div>
-                                <div id="tick10" class="tick"></div>
-                                <div id="tick11" class="tick"></div>
-                                <div id="tick12" class="tick"></div>
-                                <div id="tick13" class="tick"></div>
-                                <div id="tick14" class="tick"></div>
-                                <div id="tick15" class="tick"></div>
-                                <div id="tick16" class="tick"></div>
-                                <div id="tick17" class="tick"></div>
-                                <div id="tick18" class="tick"></div>
-                                <div id="tick19" class="tick"></div>
-                                <div id="tick20" class="tick"></div>
-                                <div id="tick21" class="tick"></div>
-                                <div id="tick22" class="tick"></div>
-                                <div id="tick23" class="tick"></div>
-                                <div id="tick24" class="tick"></div>
-                                <div id="tick25" class="tick"></div>
-                                <div id="tick26" class="tick"></div>
-                                <div id="tick27" class="tick"></div>
-                                <div id="tick28" class="tick"></div>
-                                <div id="tick29" class="tick"></div>
-                                <div id="tick30" class="tick"></div>
-                                <div id="tick31" class="tick"></div>
-                                <div id="tick32" class="tick"></div>
-                                <div id="tick33" class="tick"></div>
-                                <div id="tick34" class="tick"></div>
-                                <div id="tick35" class="tick"></div>
-                                <div id="tick36" class="tick"></div>
-                                <div id="tick37" class="tick"></div>
-                                <div id="tick38" class="tick"></div>
-                                <div id="tick39" class="tick"></div>
-                                <div id="tick40" class="tick"></div>
-                                <div id="tick41" class="tick"></div>
-                                <div id="tick42" class="tick"></div>
-                                <div id="tick43" class="tick"></div>
-                                <div id="tick44" class="tick"></div>
-                                <div id="tick45" class="tick"></div>
-                                <div id="tick46" class="tick"></div>
-                                <div id="tick47" class="tick"></div>
-                                <div id="tick48" class="tick"></div>
-                                <div id="tick49" class="tick"></div>
-                                <div id="tick50" class="tick"></div>
-                                <div id="tick51" class="tick"></div>
-                                <div id="tick52" class="tick"></div>
-                                <div id="tick53" class="tick"></div>
-                                <div id="tick54" class="tick"></div>
-                                <div id="tick55" class="tick"></div>
-                                <div id="tick56" class="tick"></div>
-                                <div id="tick57" class="tick"></div>
-                                <div id="tick58" class="tick"></div>
-                                <div id="tick59" class="tick"></div>
-                                <div id="tick60" class="tick"></div>
-                                <div id="tick61" class="tick"></div>
-                                <div id="tick62" class="tick"></div>
-                                <div id="tick63" class="tick"></div>
-                                <div id="tick64" class="tick"></div>
-                                <div id="tick65" class="tick"></div>
-                                <div id="tick66" class="tick"></div>
-                                <div id="tick67" class="tick"></div>
-                                <div id="tick68" class="tick"></div>
-                                <div id="tick69" class="tick"></div>
-                                <div id="tick70" class="tick"></div>
-                                <div id="tick71" class="tick"></div>
-                                <div id="tick72" class="tick"></div>
-                                <div id="tick73" class="tick"></div>
-                                <div id="tick74" class="tick"></div>
-                                <div id="tick75" class="tick"></div>
-                                <div id="tick76" class="tick"></div>
-                                <div id="tick77" class="tick"></div>
-                                <div id="tick78" class="tick"></div>
-                                <div id="tick79" class="tick"></div>
-                                <div id="tick80" class="tick"></div>
-                                <div id="tick81" class="tick"></div>
-                                <div id="tick82" class="tick"></div>
-                                <div id="tick83" class="tick"></div>
-                                <div id="tick84" class="tick"></div>
-                                <div id="tick85" class="tick"></div>
-                                <div id="tick86" class="tick"></div>
-                                <div id="tick87" class="tick"></div>
-                                <div id="tick88" class="tick"></div>
-                                <div id="tick89" class="tick"></div>
-                                <div id="tick90" class="tick"></div>
-                                <div id="tick91" class="tick"></div>
-                                <div id="tick92" class="tick"></div>
-                                <div id="tick93" class="tick"></div>
-                                <div id="tick94" class="tick"></div>
-                                <div id="tick95" class="tick"></div>
-                                <div id="tick96" class="tick"></div>
-                                <div id="tick97" class="tick"></div>
-                                <div id="tick98" class="tick"></div>
-                                <div id="tick99" class="tick"></div>
-                                <div id="tick100" class="tick"></div>
-                                <div id="tick101" class="tick"></div>
-                                <div id="tick102" class="tick"></div>
-                                <div id="tick103" class="tick"></div>
-                                <div id="tick104" class="tick"></div>
-                                <div id="tick105" class="tick"></div>
-                                <div id="tick106" class="tick"></div>
-                                <div id="tick107" class="tick"></div>
-                                <div id="tick108" class="tick"></div>
-                                <div id="tick109" class="tick"></div>
-                                <div id="tick110" class="tick"></div>
-                                <div id="tick111" class="tick"></div>
-                                <div id="tick112" class="tick"></div>
-                                <div id="tick113" class="tick"></div>
-                                <div id="tick114" class="tick"></div>
-                                <div id="tick115" class="tick"></div>
-                                <div id="tick116" class="tick"></div>
-                                <div id="tick117" class="tick"></div>
-                                <div id="tick118" class="tick"></div>
-                                <div id="tick119" class="tick"></div>
-                                <div id="tick120" class="tick"></div>
-                                <div id="tick121" class="tick"></div>
-                                <div id="tick122" class="tick"></div>
-                                <div id="tick123" class="tick"></div>
-                                <div id="tick124" class="tick"></div>
-                                <div id="tick125" class="tick"></div>
-                                <div id="tick126" class="tick"></div>
-                                <div id="tick127" class="tick"></div>
-                                <div id="tick128" class="tick"></div>
-                                <div id="tick129" class="tick"></div>
-                                <div id="tick130" class="tick"></div>
-                                <div id="tick131" class="tick"></div>
-                                <div id="tick132" class="tick"></div>
-                                <div id="tick133" class="tick"></div>
-                                <div id="tick134" class="tick"></div>
-                                <div id="tick135" class="tick"></div>
-                                <div id="tick136" class="tick"></div>
-                                <div id="tick137" class="tick"></div>
-                                <div id="tick138" class="tick"></div>
-                                <div id="tick139" class="tick"></div>
-                                <div id="tick140" class="tick"></div>
-                                <div id="tick141" class="tick"></div>
-                                <div id="tick142" class="tick"></div>
-                                <div id="tick143" class="tick"></div>
-                                <div id="tick144" class="tick"></div>
-                                <div id="tick145" class="tick"></div>
-                                <div id="tick146" class="tick"></div>
-                                <div id="tick147" class="tick"></div>
-                                <div id="tick148" class="tick"></div>
-                                <div id="tick149" class="tick"></div>
-                                <div id="tick150" class="tick"></div>
-                                <div id="tick151" class="tick"></div>
-                                <div id="tick152" class="tick"></div>
-                                <div id="tick153" class="tick"></div>
-                                <div id="tick154" class="tick"></div>
-                                <div id="tick155" class="tick"></div>
-                                <div id="tick156" class="tick"></div>
-                                <div id="tick157" class="tick"></div>
-                                <div id="tick158" class="tick"></div>
-                                <div id="tick159" class="tick"></div>
-                                <div id="tick160" class="tick"></div>
-                                <div id="tick161" class="tick"></div>
-                                <div id="tick162" class="tick"></div>
-                                <div id="tick163" class="tick"></div>
-                                <div id="tick164" class="tick"></div>
-                                <div id="tick165" class="tick"></div>
-                                <div id="tick166" class="tick"></div>
-                                <div id="tick167" class="tick"></div>
-                                <div id="tick168" class="tick"></div>
-                                <div id="tick169" class="tick"></div>
-                                <div id="tick170" class="tick"></div>
-                                <div id="tick171" class="tick"></div>
-                                <div id="tick172" class="tick"></div>
-                                <div id="tick173" class="tick"></div>
-                                <div id="tick174" class="tick"></div>
-                                <div id="tick175" class="tick"></div>
-                                <div id="tick176" class="tick"></div>
-                                <div id="tick177" class="tick"></div>
-                                <div id="tick178" class="tick"></div>
-                                <div id="tick179" class="tick"></div>
-                                <div id="tick180" class="tick"></div>
-                                <div id="tick181" class="tick"></div>
-                                <div id="tick182" class="tick"></div>
-                                <div id="tick183" class="tick"></div>
-                                <div id="tick184" class="tick"></div>
-                                <div id="tick185" class="tick"></div>
-                                <div id="tick186" class="tick"></div>
-                                <div id="tick187" class="tick"></div>
-                                <div id="tick188" class="tick"></div>
-                                <div id="tick189" class="tick"></div>
-                                <div id="tick190" class="tick"></div>
-                                <div id="tick191" class="tick"></div>
-                                <div id="tick192" class="tick"></div>
-                                <div id="tick193" class="tick"></div>
-                                <div id="tick194" class="tick"></div>
-                                <div id="tick195" class="tick"></div>
-                                <div id="tick196" class="tick"></div>
-                                <div id="tick197" class="tick"></div>
-                                <div id="tick198" class="tick"></div>
-                                <div id="tick199" class="tick"></div>
-                                <div id="tick200" class="tick"></div>
-                            </div>
+                            <div id="URTCont"></div>
 						</div>
+                        <div class="wrapper_1" id="pp_wrapper">
+                            <div class="pp" id="pp_box">
+                                <span class="text_1" id="pp_text" style="width: 500px;">
+                                    <span class="odometer" id="pp_txt"></span>
+                                    <span id="ppfc_txt"></span>
+                                </span>
+                            </div>
+                        </div>
 					</div>
                 </div>
             </div>
             <div id="KeyOverlayCont">
-                <!-- KeyOverlay by ck. (Modified) -->
                 <div id="keyOverlay" class="--top -right KeyRelative">
                     <div class="main">
                       <div class="keys k1 hidden">
                         <div class="count">
                             <div id="k1Count" class="odometer"></div>
+                            <div id="k1Name" class="wide">K1</div>
                         </div>
                         <div class="wrapper">
                           <div id="k1Press" class="press"></div>
@@ -422,22 +239,24 @@
                       <div class="keys k2 hidden">
                         <div class="count">
                             <div id="k2Count" class="odometer"></div>
+                            <div id="k2Name" class="wide">K2</div>
                         </div>
-                        <div class="wrapper">
-                          <div id="k2Press" class="press"></div>
-                  
-                          <div class="bpm">
-                            <div id="k2Bpm" class="bpmcount">0</div>
-                            <div class="bpmtext">bpm</div>
-                          </div>
-                        </div>
-                        <div class="tiles">
-                            <div id="k2_canvas" class="canvas"></div>
-                        </div>
+                            <div class="wrapper">
+                            <div id="k2Press" class="press"></div>
+
+                            <div class="bpm">
+                                <div id="k2Bpm" class="bpmcount">0</div>
+                                <div class="bpmtext">bpm</div>
+                            </div>
+                            </div>
+                            <div class="tiles">
+                                <div id="k2_canvas" class="canvas"></div>
+                            </div>
                       </div>
                       <div class="keys m1 hidden">
                         <div class="count">
                             <div id="m1Count" class="odometer"></div>
+                            <div id="m1Name" class="wide">M1</div>
                         </div>
                         <div class="wrapper">
                           <div id="m1Press" class="press"></div>
@@ -454,6 +273,7 @@
                       <div class="keys m2 hidden">
                         <div class="count">
                             <div id="m2Count" class="odometer"></div>
+                            <div id="m2Name" class="wide">M2</div>
                         </div>
                         <div class="wrapper">
                           <div id="m2Press" class="press"></div>
@@ -471,162 +291,167 @@
                 </div>
             </div>
             <div id="RankingPanel">
-                <div id="bgborder"></div>
-                <div id="ResultTop">
-                    <div id="MapStats">
-                        <div id="StatsBG">
-                            <div id="rankStatus"></div>
-                            <div id="starRating"></div>
-                            <img id="RBG"></img>
+                <img id="rankingPanelBG"></img>
+                <div id="bgpanel">
+                    <div id="bgborder"></div>
+                        <div id="adbanner">
+                            <div id="adimg"></div>
                         </div>
-                        <div id="StatsText">
-                            <div id="Song" style="font-size: 50px; font-weight: 800; height: 55px;"></div>
-                            <div id="Artist" style="font-size: 30px; height: 35px;"></div>
-                            <div id="Mapper" style="font-size: 25px; font-weight: 200; height: 35px;"></div>
-                        </div>
-                    </div>
-                    <div id="StatsBPM"></div>
-                    <div id="StatsBar">
-                        <div id="CS" class="StatsBL">
-                            <div id="PHCS" style="width: 70px;">CS</div>
-                            <div id="CSLine" class="LineBar">
-                                <div id="CSGlow" class="GlowBar">
-                                    <div id="CSText" class="TextBar"></div>
+                        <div id="ResultTop">
+                            <div id="MapStats">
+                                <div id="StatsBG">
+                                    <div id="rankStatus"></div>
+                                    <div id="starRating"></div>
+                                    <img id="RBG"></img>
+                                </div>
+                                <div id="StatsText">
+                                    <div id="Song" style="font-size: 50px; font-weight: 800; height: 55px;"></div>
+                                    <div id="Artist" style="font-size: 30px; height: 35px;"></div>
+                                    <div id="Mapper" style="font-size: 25px; font-weight: 200; height: 35px;"></div>
+                                </div>
+                            </div>
+                            <div id="StatsBPM"></div>
+                            <div id="StatsBar">
+                                <div id="CS" class="StatsBL">
+                                    <div id="PHCS" style="width: 70px;">CS</div>
+                                    <div id="CSLine" class="LineBar">
+                                        <div id="CSGlow" class="GlowBar">
+                                            <div id="CSText" class="TextBar"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="AR" class="StatsBL">
+                                    <div id="PHAR" style="width: 70px;">AR</div>
+                                    <div id="ARLine" class="LineBar">
+                                        <div id="ARGlow" class="GlowBar">
+                                            <div id="ARText" class="TextBar"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="OD" class="StatsBL">
+                                    <div id="PHOD" style="width: 70px;">OD</div>
+                                    <div id="ODLine" class="LineBar">
+                                        <div id="ODGlow" class="GlowBar">
+                                            <div id="ODText" class="TextBar"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="HP" class="StatsBL">
+                                    <div id="PHHP" style="width: 70px;">HP</div>
+                                    <div id="HPLine" class="LineBar">
+                                        <div id="HPGlow" class="GlowBar">
+                                            <div id="HPText" class="TextBar"></div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div id="AR" class="StatsBL">
-                            <div id="PHAR" style="width: 70px;">AR</div>
-                            <div id="ARLine" class="LineBar">
-                                <div id="ARGlow" class="GlowBar">
-                                    <div id="ARText" class="TextBar"></div>
+                        <div id="ResultMiddle">
+                            <div id="PlayerContainer" style="width: 700px;">
+                                <div id="TContainer">
+                                    <div id="PlayerData">
+                                        <div id="PlayerAvatar"></div>
+                                        <div id="NameFlag">
+                                            <div id="PlayerName"></div>
+                                            <div id="PlayerFlag"></div>
+                                        </div>
+                                    </div>
+                                    <div id="PlayerGR"></div>
+                                    <div id="PlayerCR"></div>
+                                    <div id="PlayerTotalPP"></div>
+                                </div>
+                            </div>
+                            <div id="MiddleBar"></div>
+                            <div id="ScoreResultContainer" style="width: 700px;">
+                                <div id="PContainer">
+                                    <div style="font-size: 25px; height: 20px;">Score</div>
+                                    <div id="PlayerScore"></div>
+                                    <div id="JudgementTotal">
+                                        <div id="Judge100" class="JudgeBar"></div>
+                                        <div id="r100"></div>
+                                        <div id="Judge50" class="JudgeBar"></div>
+                                        <div id="r50"></div>
+                                        <div id="Judge0" class="JudgeBar"></div>
+                                        <div id="r0"></div>
+                                        <div id="JudgeSB" class="JudgeBar"></div>
+                                        <div id="rSB"></div>
+                                    </div>
+                                    <div id="PlayerAcc"></div>
+                                    <div id="PlayerMaxCombo"></div>
+                                    <div id="PlayerPPResult">
+                                        <div id="PPResult"></div>
+                                        <div id="PPResultIfFC"></div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div id="OD" class="StatsBL">
-                            <div id="PHOD" style="width: 70px;">OD</div>
-                            <div id="ODLine" class="LineBar">
-                                <div id="ODGlow" class="GlowBar">
-                                    <div id="ODText" class="TextBar"></div>
+                        <div id="ResultBottom">
+                            <div id="resultRecorder"></div>
+                            <div id="SonataTextResult">Sonata The Moon...</div>
+                            <div id="createdAt"></div>
+                            <div id="SongRanking">
+                                <div id="rankingResult"></div>
+                                <div id="modContainer"></div>
+                            </div>
+                        </div>
+                        <div id="ResultPerformance">
+                            <div id="UserTopPlay">
+                                <div id="Top1" class="TopPlay">
+                                    <div id="TopDate1" class="topDate"></div>
+                                    <div class="topStat">
+                                        <div id="TopRanking1" class="topRanking"></div>
+                                        <div id="TopMods1" class="topMods"></div>
+                                        <div id="topPP1" class="topPP"></div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div id="HP" class="StatsBL">
-                            <div id="PHHP" style="width: 70px;">HP</div>
-                            <div id="HPLine" class="LineBar">
-                                <div id="HPGlow" class="GlowBar">
-                                    <div id="HPText" class="TextBar"></div>
+                                <div id="Top2" class="TopPlay">
+                                    <div id="TopDate2" class="topDate"></div>
+                                    <div class="topStat">
+                                        <div id="TopRanking2" class="topRanking"></div>
+                                        <div id="TopMods2" class="topMods"></div>
+                                        <div id="topPP2" class="topPP"></div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div id="ResultMiddle">
-                    <div id="PlayerContainer" style="width: 700px;">
-                        <div id="TContainer">
-                            <div id="PlayerData">
-                                <div id="PlayerAvatar"></div>
-                                <div id="NameFlag">
-                                    <div id="PlayerName"></div>
-                                    <div id="PlayerFlag"></div>
+                                <div id="Top3" class="TopPlay">
+                                    <div id="TopDate3" class="topDate"></div>
+                                    <div class="topStat">
+                                        <div id="TopRanking3" class="topRanking"></div>
+                                        <div id="TopMods3" class="topMods"></div>
+                                        <div id="topPP3" class="topPP"></div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div id="PlayerGR"></div>
-                            <div id="PlayerCR"></div>
-                            <div id="PlayerTotalPP"></div>
-                        </div>
-                    </div>
-                    <div id="MiddleBar"></div>
-                    <div id="ScoreResultContainer" style="width: 700px;">
-                        <div id="PContainer">
-                            <div style="font-size: 25px; height: 20px;">Score</div>
-                            <div id="PlayerScore"></div>
-                            <div id="JudgementTotal">
-                                <div id="Judge100" class="JudgeBar"></div>
-                                <div id="r100"></div>
-                                <div id="Judge50" class="JudgeBar"></div>
-                                <div id="r50"></div>
-                                <div id="Judge0" class="JudgeBar"></div>
-                                <div id="r0"></div>
-                                <div id="JudgeSB" class="JudgeBar"></div>
-                                <div id="rSB"></div>
-                            </div>
-                            <div id="PlayerAcc"></div>
-                            <div id="PlayerMaxCombo"></div>
-                            <div id="PlayerPPResult">
-                                <div id="PPResult"></div>
-                                <div id="PPResultIfFC"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div id="ResultBottom">
-                    <div id="resultRecorder"></div>
-                    <div id="SonataTextResult">Alayna, My Love...</div>
-                    <div id="createdAt"></div>
-                    <div id="SongRanking">
-                        <div id="rankingResult"></div>
-                        <div id="modContainer"></div>
-                    </div>
-                </div>
-                <div id="ResultPerformance">
-                    <div id="UserTopPlay">
-                        <div id="Top1" class="TopPlay">
-                            <div id="TopDate1" class="topDate"></div>
-                            <div class="topStat">
-                                <div id="TopRanking1" class="topRanking"></div>
-                                <div id="TopMods1" class="topMods"></div>
-                                <div id="topPP1" class="topPP"></div>
-                            </div>
-                        </div>
-                        <div id="Top2" class="TopPlay">
-                            <div id="TopDate2" class="topDate"></div>
-                            <div class="topStat">
-                                <div id="TopRanking2" class="topRanking"></div>
-                                <div id="TopMods2" class="topMods"></div>
-                                <div id="topPP2" class="topPP"></div>
-                            </div>
-                        </div>
-                        <div id="Top3" class="TopPlay">
-                            <div id="TopDate3" class="topDate"></div>
-                            <div class="topStat">
-                                <div id="TopRanking3" class="topRanking"></div>
-                                <div id="TopMods3" class="topMods"></div>
-                                <div id="topPP3" class="topPP"></div>
-                            </div>
-                        </div>
-                        <div id="Top4" class="TopPlay">
-                            <div id="TopDate4" class="topDate"></div>
-                            <div class="topStat">
-                                <div id="TopRanking4" class="topRanking"></div>
-                                <div id="TopMods4" class="topMods"></div>
-                                <div id="topPP4" class="topPP"></div>
-                            </div>
-                        </div>
-                        <div id="Top5" class="TopPlay">
-                            <div id="TopDate5" class="topDate"></div>
-                            <div class="topStat">
-                                <div id="TopRanking5" class="topRanking"></div>
-                                <div id="TopMods5" class="topMods"></div>
-                                <div id="topPP5" class="topPP"></div>
-                            </div>
-                        </div>
-                        <div id="Top6" class="TopPlay">
-                            <div id="TopDate6" class="topDate"></div>
-                            <div class="topStat">
-                                <div id="TopRanking6" class="topRanking"></div>
-                                <div id="TopMods6" class="topMods"></div>
-                                <div id="topPP6" class="topPP"></div>
+                                <div id="Top4" class="TopPlay">
+                                    <div id="TopDate4" class="topDate"></div>
+                                    <div class="topStat">
+                                        <div id="TopRanking4" class="topRanking"></div>
+                                        <div id="TopMods4" class="topMods"></div>
+                                        <div id="topPP4" class="topPP"></div>
+                                    </div>
+                                </div>
+                                <div id="Top5" class="TopPlay">
+                                    <div id="TopDate5" class="topDate"></div>
+                                    <div class="topStat">
+                                        <div id="TopRanking5" class="topRanking"></div>
+                                        <div id="TopMods5" class="topMods"></div>
+                                        <div id="topPP5" class="topPP"></div>
+                                    </div>
+                                </div>
+                                <div id="Top6" class="TopPlay">
+                                    <div id="TopDate6" class="topDate"></div>
+                                    <div class="topStat">
+                                        <div id="TopRanking6" class="topRanking"></div>
+                                        <div id="TopMods6" class="topMods"></div>
+                                        <div id="topPP6" class="topPP"></div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
         <svg width="0" height="0">
 			<defs>
 			  <clipPath id="myClip">
-				<polygon points="2200,1380 2560,1380 2560,1440 2200,1440"/>
 				<polygon points="2460,600 2560,600 2560,1000 2460,1000"/>
 			  </clipPath>
 			</defs>

@@ -1,15 +1,11 @@
 .DebugBox {
+    background-color: #161616;
+    outline: 15px solid #161616;
+    border: 3px solid #ffffff;
     margin: 15px;
-    padding: 15px 35px 15px 20px;
+    padding: 10px;
     width: fit-content;
     height: fit-content;
-    background-color: #050819;
-}
-.DebugBorder {
-    width: 97%;
-    height: 95%;
-    border: 3px solid #a1c9ff;
-    padding: 10px;
 }
 .DebugText {
     font-family: 'Stanley Moon';
@@ -17,14 +13,18 @@
     font-weight: 200;
 }
 #DevInformation {
-    background-color: #050819;
-    color: #a1c9ff;
-    transition: ease 1s;
+    background-color: #161616;
+    outline: 15px solid #161616;
+    border: 3px solid #ffffff;
+    color: #ffffff;
+    transition: ease transform 1s, ease opacity 1s;
 }
 #CrashReportDebug {
     background-color: #190505;
+    outline: 15px solid #190505;
+    border: 3px solid #ffa1a1;
     color: #ffa1a1;
-    transition: ease 1s 1s;
+    transition: ease transform 1s 1s, ease opacity 1s 1s;
 }
 #CrashReportDebug, #DevInformation {
     position: absolute;
@@ -33,25 +33,9 @@
     margin-left: auto;
     margin-right: auto;
     bottom: 100px;
-    padding: 15px 20px 15px 20px;
+    padding: 15px;
     font-size: 30px;
     z-index: 3;
-}
-#SadFace,#DevPics {
-    width: 200px;
-    height: 200px;
-    background-size: 100%;
-}
-#SadFace {
-    background-image: url('../static/hosisad.png');
-}
-#DevPics {
-    background-image: url('../static/devnotice.png');
-}
-#CrashText,#DevVersion {
-    font-size: 45px;
-}
-#CrashBorder, #DevInformationBorder {
     text-align: center;
     justify-content: center;
     align-items: center;
@@ -62,6 +46,22 @@
     padding-right: 20px;
     width: 1300px;
     line-height: 30px;
+}
+#SadFace,#DevPics {
+    width: 200px;
+    height: 200px;
+    background-position: 50%;
+    background-size: cover;
+    border-radius: 20px;
+}
+#SadFace {
+    background-image: url('../static/hosisad.png');
+}
+#DevPics {
+    background-image: url('../static/devnotice.png');
+}
+#CrashText,#DevVersion {
+    font-size: 45px;
 }
 #CrashBorder {
     border: 3px solid #ffa1a1;

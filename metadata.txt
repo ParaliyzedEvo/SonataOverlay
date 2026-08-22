@@ -1,7 +1,7 @@
 Usecase: ingame, obs-overlay
 Name: SonataOverlay
-Version: 1.21
-Author: 
+Version: 1.3-Remastered
+Author: shinomimi
 CompatibleWith: tosu
 Resolution: 2560x1440
-authorLinks: 
+authorLinks: https://github.com/shinomimi

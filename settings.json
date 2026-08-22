@@ -1,11 +1,27 @@
 [
     {
         "uniqueID": "Bar",
-        "type": "color",
+        "type": "text",
         "title": "Setup",
-        "description": "===========================================",
+        "description": "____________________________________________",
         "options": "",
-        "value": ""
+        "value": "API settings (like color changes) need to refresh the overlay"
+    },
+    {
+        "uniqueID": "StreamerModeEnabled",
+        "type": "checkbox",
+        "title": "Hide Recorder",
+        "description": "Just in case tbh",
+        "options": "",
+        "value": false
+    },
+    {
+        "uniqueID": "HideGameStatus",
+        "type": "checkbox",
+        "title": "Hide Game Status?",
+        "description": "Just in case tbh",
+        "options": "",
+        "value": true
     },
     {
         "uniqueID": "Recorder",
@@ -13,7 +29,7 @@
         "title": "Recorder Name!",
         "description": "",
         "options": "",
-        "value": "Đỗ Nguyễn Thu Trang ❤"
+        "value": "ParaliyzedEvo"
     },
     {
         "uniqueID": "HidePanel",
@@ -48,10 +64,18 @@
         "value": false
     },
     {
+        "uniqueID": "gamerlocal",
+        "type": "checkbox",
+        "title": "Use local gamer avatar as default avatar",
+        "description": "",
+        "options": "",
+        "value": true
+    },
+    {
         "uniqueID": "Bar1",
         "type": "color",
         "title": "Leaderboard",
-        "description": "===========================================",
+        "description": "____________________________________________",
         "options": "",
         "value": ""
     },
@@ -70,15 +94,16 @@
         "description": "",
         "options": [
             "Global",
-            "Selected Mods"
+            "Selected Mods",
+            "Local"
         ],
-        "value": "Global"
+        "value": "Local"
     },
     {
         "uniqueID": "Bar2",
         "type": "color",
         "title": "Color Settings",
-        "description": "===========================================",
+        "description": "____________________________________________",
         "options": "",
         "value": ""
     },
@@ -94,17 +119,33 @@
         "value": "API"
     },
     {
+        "uniqueID": "CustomIDColor",
+        "type": "checkbox",
+        "title": "Custom Avatar Color (API)",
+        "description": "via Postimage",
+        "options": "",
+        "value": false
+    },
+    {
+        "uniqueID": "CustomIDSet",
+        "type": "text",
+        "title": "Custom Avatar Color Link (API)",
+        "description": "Example: https://i.postimg.cc/SNxPr0w2/mehosi.png (SNxPr0w2/mehosi.png)",
+        "options": "",
+        "value": ""
+    },
+    {
         "uniqueID": "HueID",
         "type": "number",
-        "title": "(Color Selection Manual) Hue Color",
+        "title": "Hue Color (Manual)",
         "description": "from 0 to 360",
-        "options": "API,Manual",
+        "options": "",
         "value": 0
     },
     {
         "uniqueID": "SaturationID",
         "type": "number",
-        "title": "(Color Selection Manual) Saturation Color",
+        "title": "Saturation Color (Manual)",
         "description": "from 0 to 100",
         "options": "",
         "value": 0
@@ -112,7 +153,7 @@
     {
         "uniqueID": "HueID2",
         "type": "number",
-        "title": "(Color Selection Manual) Hue Color 2",
+        "title": "Hue Color 2 (Manual)",
         "description": "from 0 to 360",
         "options": "",
         "value": 0
@@ -120,7 +161,7 @@
     {
         "uniqueID": "SaturationID2",
         "type": "number",
-        "title": "(Color Selection Manual) Saturation Color 2",
+        "title": "Saturation Color 2 (Manual)",
         "description": "from 0 to 100",
         "options": "",
         "value": 0
@@ -129,17 +170,17 @@
         "uniqueID": "Bar3",
         "type": "color",
         "title": "Local Player Data",
-        "description": "=== Used for empty name or not in bancho replays ===",
+        "description": "Used for empty name or not in bancho* replays",
         "options": "",
         "value": ""
     },
     {
-        "uniqueID": "LocalNameData",
+        "uniqueID": "LocalName",
         "type": "text",
         "title": "Local Name?",
         "description": "",
         "options": "",
-        "value": "Kiana"
+        "value": ""
     },
     {
         "uniqueID": "GBrank",
@@ -177,15 +218,15 @@
         "uniqueID": "Bar4",
         "type": "color",
         "title": "Local Top Play Data 1",
-        "description": "======== plz fill all ========",
+        "description": "_________ plz fill all _________",
         "options": "",
         "value": ""
     },
     {
         "uniqueID": "mapid0",
         "type": "number",
-        "title": "Beatmap ID?",
-        "description": "Example: 4409628",
+        "title": "Beatmap Set ID?",
+        "description": "Example: 1115534",
         "options": "",
         "value": ""
     },
@@ -215,9 +256,9 @@
     },
     {
         "uniqueID": "modsid0",
-        "type": "number",
-        "title": "Mods?",
-        "description": "Example: HDHR",
+        "type": "text",
+        "title": "Mods ID?",
+        "description": "Example: 8(HD)",
         "options": "",
         "value": ""
     },
@@ -225,15 +266,15 @@
         "uniqueID": "Bar5",
         "type": "color",
         "title": "Local Top Play Data 2",
-        "description": "======== plz fill all ========",
+        "description": "_________ plz fill all _________",
         "options": "",
         "value": ""
     },
     {
         "uniqueID": "mapid1",
         "type": "number",
-        "title": "Beatmap ID?",
-        "description": "Example: 4409628",
+        "title": "Beatmap Set ID?",
+        "description": "Example: 1115534",
         "options": "",
         "value": ""
     },
@@ -264,8 +305,8 @@
     {
         "uniqueID": "modsid1",
         "type": "number",
-        "title": "Mods?",
-        "description": "Example: HDHR",
+        "title": "Mods ID?",
+        "description": "Example: 8(HD)",
         "options": "",
         "value": ""
     },
@@ -273,15 +314,15 @@
         "uniqueID": "Bar6",
         "type": "color",
         "title": "Local Top Play Data 3",
-        "description": "======== plz fill all ========",
+        "description": "_________ plz fill all _________",
         "options": "",
         "value": ""
     },
     {
         "uniqueID": "mapid2",
         "type": "number",
-        "title": "Beatmap ID?",
-        "description": "Example: 4409628",
+        "title": "Beatmap Set ID?",
+        "description": "Example: 1115534",
         "options": "",
         "value": ""
     },
@@ -312,8 +353,8 @@
     {
         "uniqueID": "modsid2",
         "type": "number",
-        "title": "Mods?",
-        "description": "Example: HDHR",
+        "title": "Mods ID?",
+        "description": "Example: 8(HD)",
         "options": "",
         "value": ""
     },
@@ -321,15 +362,15 @@
         "uniqueID": "Bar7",
         "type": "color",
         "title": "Local Top Play Data 4",
-        "description": "======== plz fill all ========",
+        "description": "_________ plz fill all _________",
         "options": "",
         "value": ""
     },
     {
         "uniqueID": "mapid3",
         "type": "number",
-        "title": "Beatmap ID?",
-        "description": "Example: 4409628",
+        "title": "Beatmap Set ID?",
+        "description": "Example: 1115534",
         "options": "",
         "value": ""
     },
@@ -360,8 +401,8 @@
     {
         "uniqueID": "modsid3",
         "type": "number",
-        "title": "Mods?",
-        "description": "Example: HDHR",
+        "title": "Mods ID?",
+        "description": "Example: 8(HD)",
         "options": "",
         "value": ""
     },
@@ -369,15 +410,15 @@
         "uniqueID": "Bar8",
         "type": "color",
         "title": "Local Top Play Data 5",
-        "description": "======== plz fill all ========",
+        "description": "_________ plz fill all _________",
         "options": "",
         "value": ""
     },
     {
         "uniqueID": "mapid4",
         "type": "number",
-        "title": "Beatmap ID?",
-        "description": "Example: 4409628",
+        "title": "Beatmap Set ID?",
+        "description": "Example: 1115534",
         "options": "",
         "value": ""
     },
@@ -408,8 +449,8 @@
     {
         "uniqueID": "modsid4",
         "type": "number",
-        "title": "Mods?",
-        "description": "Example: HDHR",
+        "title": "Mods ID?",
+        "description": "Example: 8(HD)",
         "options": "",
         "value": ""
     },
@@ -417,15 +458,15 @@
         "uniqueID": "Bar9",
         "type": "color",
         "title": "Local Top Play Data 6",
-        "description": "======== plz fill all ========",
+        "description": "_________ plz fill all _________",
         "options": "",
         "value": ""
     },
     {
         "uniqueID": "mapid5",
         "type": "number",
-        "title": "Beatmap ID?",
-        "description": "Example: 4409628",
+        "title": "Beatmap Set ID?",
+        "description": "Example: 1115534",
         "options": "",
         "value": ""
     },
@@ -456,8 +497,8 @@
     {
         "uniqueID": "modsid5",
         "type": "number",
-        "title": "Mods?",
-        "description": "Example: HDHR",
+        "title": "Mods ID?",
+        "description": "Example: 8(HD)",
         "options": "",
         "value": ""
     }
